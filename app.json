@@ -5,11 +5,11 @@
 		"slug": "travelly",
 		"version": "1.0.0",
 		"orientation": "portrait",
-		"icon": "./assets/icon.png",
+		"icon": "./assets/travelly.png",
 		"splash": {
-			"image": "./assets/splash.png",
+			"image": "./assets/travelly.png",
 			"resizeMode": "contain",
-			"backgroundColor": "#ffffff"
+			"backgroundColor": "#003fba"
 		},
 		"updates": {
 			"fallbackToCacheTimeout": 0
@@ -20,12 +20,12 @@
 		},
 		"android": {
 			"adaptiveIcon": {
-				"foregroundImage": "./assets/adaptive-icon.png",
-				"backgroundColor": "#FFFFFF"
+				"foregroundImage": "./assets/travelly.png",
+				"backgroundColor": "#003fba"
 			}
 		},
 		"web": {
-			"favicon": "./assets/favicon.png"
+			"favicon": "./assets/travelly.png"
 		}
 	}
 }
