@@ -1,5 +1,5 @@
 import React from 'react';
-import { Alert } from 'react-native';
+import { View, Alert, TouchableOpacity } from 'react-native';
 import { Button, Form, Screen, Text, TextInput } from '../components';
 import * as yup from 'yup';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -14,7 +14,7 @@ const validationSchema = yup.object({
 		.label('Password confirmation'),
 });
 
-export default Signup = () => (
+export default Signup = ({ navigation }) => (
 	<Screen style={{ alignItems: 'center', justifyContent: 'center' }}>
 		<Text
 			color='blue'
@@ -38,7 +38,7 @@ export default Signup = () => (
 						if (users.find(user => user.username === username)) {
 							Alert.alert(
 								'Oops!',
-								'User already exists. Please login instead.'
+								'User already exists. Please log in instead.'
 							);
 							return;
 						}
@@ -46,10 +46,22 @@ export default Signup = () => (
 						users = [];
 					}
 					users.push({ username, password });
-					AsyncStorage.setItem(
-						'users',
-						JSON.stringify(users)
-					).then(() => console.log('Signup'));
+					AsyncStorage.setItem('users', JSON.stringify(users)).then(
+						() => {
+							Alert.alert(
+								'Ta-da!',
+								'Your account has been successfully created. You will now proceed to the login screen.',
+								[
+									{
+										text: 'OK',
+										onPress: () =>
+											navigation.navigate('Login'),
+										style: 'cancel',
+									},
+								]
+							);
+						}
+					);
 				});
 			}}>
 			{({
@@ -59,11 +71,12 @@ export default Signup = () => (
 				touched,
 				errors,
 				handleSubmit,
+				resetForm,
 			}) => (
 				<>
 					<TextInput
 						autoCapitalize='none'
-						autoFocus={true}
+						autoFocus
 						placeholder='Username'
 						value={values.username}
 						onChangeText={handleChange('username')}
@@ -91,9 +104,23 @@ export default Signup = () => (
 					/>
 					<Button
 						onPress={handleSubmit}
-						icon='group-add'
+						icon='person-add'
 						title='Signup'
 					/>
+					<View style={{ flexDirection: 'row', alignSelf: 'center' }}>
+						<Text color='gray' style={{ marginTop: 10 }}>
+							Already have an account?{' '}
+						</Text>
+						<TouchableOpacity
+							onPress={() => {
+								resetForm();
+								navigation.navigate('Login');
+							}}>
+							<Text color='cyan' style={{ marginTop: 10 }}>
+								Log in
+							</Text>
+						</TouchableOpacity>
+					</View>
 				</>
 			)}
 		</Form>

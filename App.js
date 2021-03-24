@@ -1,4 +1,6 @@
+import 'react-native-gesture-handler';
 import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
 import AppLoading from 'expo-app-loading';
 import {
 	useFonts,
@@ -6,7 +8,8 @@ import {
 	Roboto_700Bold,
 	Roboto_900Black,
 } from '@expo-google-fonts/roboto';
-import { Login, Signup } from './screens';
+import { AuthContextProvider } from './contexts';
+import { AuthStack } from './routes';
 
 export default App = () => {
 	const [fontsLoaded] = useFonts({
@@ -17,5 +20,11 @@ export default App = () => {
 
 	if (!fontsLoaded) return <AppLoading />;
 
-	return <Login />;
+	return (
+		<AuthContextProvider>
+			<NavigationContainer>
+				<AuthStack />
+			</NavigationContainer>
+		</AuthContextProvider>
+	);
 };
