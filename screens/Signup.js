@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Alert, TouchableOpacity } from 'react-native';
 import { Button, Form, Screen, Text, TextInput } from '../components';
 import * as yup from 'yup';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as SecureStore from 'expo-secure-store';
 
 const validationSchema = yup.object({
 	username: yup.string().required().min(8).max(20).label('Username'),
@@ -31,7 +31,7 @@ export default Signup = ({ navigation }) => (
 			validationSchema={validationSchema}
 			onSubmit={({ username, password }, { resetForm }) => {
 				resetForm();
-				AsyncStorage.getItem('users').then(value => {
+				SecureStore.getItemAsync('users').then(value => {
 					let users;
 					if (value) {
 						users = JSON.parse(value);
@@ -46,22 +46,22 @@ export default Signup = ({ navigation }) => (
 						users = [];
 					}
 					users.push({ username, password });
-					AsyncStorage.setItem('users', JSON.stringify(users)).then(
-						() => {
-							Alert.alert(
-								'Ta-da!',
-								'Your account has been successfully created. You will now proceed to the login screen.',
-								[
-									{
-										text: 'OK',
-										onPress: () =>
-											navigation.navigate('Login'),
-										style: 'cancel',
-									},
-								]
-							);
-						}
-					);
+					SecureStore.setItemAsync(
+						'users',
+						JSON.stringify(users)
+					).then(() => {
+						Alert.alert(
+							'Ta-da!',
+							'Your account has been successfully created. You will now proceed to the login screen.',
+							[
+								{
+									text: 'OK',
+									onPress: () => navigation.navigate('Login'),
+									style: 'cancel',
+								},
+							]
+						);
+					});
 				});
 			}}>
 			{({

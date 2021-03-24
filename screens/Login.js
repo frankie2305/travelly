@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { View, Alert, TouchableOpacity } from 'react-native';
 import { Button, Form, Screen, Text, TextInput } from '../components';
 import * as yup from 'yup';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as SecureStore from 'expo-secure-store';
 import { AuthContext } from '../contexts';
 
 const validationSchema = yup.object({
@@ -30,7 +30,7 @@ export default Login = ({ navigation }) => {
 				validationSchema={validationSchema}
 				onSubmit={({ username, password }, { resetForm }) => {
 					resetForm();
-					AsyncStorage.getItem('users').then(value => {
+					SecureStore.getItemAsync('users').then(value => {
 						let users = JSON.parse(value);
 						if (
 							users.find(
