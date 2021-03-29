@@ -105,7 +105,7 @@ export default Signup = ({ navigation }) => (
 					<Button
 						onPress={handleSubmit}
 						icon='person-add'
-						title='Signup'
+						title='Sign up'
 					/>
 					<View style={{ flexDirection: 'row', alignSelf: 'center' }}>
 						<Text color='gray' style={{ marginTop: 10 }}>

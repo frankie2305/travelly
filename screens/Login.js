@@ -80,7 +80,7 @@ export default Login = ({ navigation }) => {
 						<Button
 							onPress={handleSubmit}
 							icon='login'
-							title='Login'
+							title='Log in'
 						/>
 						<View
 							style={{
