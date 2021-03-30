@@ -7,7 +7,7 @@ export default Welcome = ({ navigation }) => (
 		source={require('../assets/welcome.png')}
 		resizeMode='contain'
 		style={styles.bg}>
-		<View style={{ width: '50%', marginBottom: '20%' }}>
+		<View style={styles.btnContainer}>
 			<Button
 				color='cyan'
 				title='Sign up'
@@ -30,5 +30,9 @@ const styles = StyleSheet.create({
 		backgroundColor: '#003fba',
 		alignItems: 'center',
 		justifyContent: 'flex-end',
+	},
+	btnContainer: {
+		width: '50%',
+		marginBottom: '20%',
 	},
 });

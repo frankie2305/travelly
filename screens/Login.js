@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
 import { View, Alert, TouchableOpacity } from 'react-native';
-import { Button, Form, Screen, Text, TextInput } from '../components';
 import * as yup from 'yup';
 import * as SecureStore from 'expo-secure-store';
 import { AuthContext } from '../contexts';
+import { Button, Form, Screen, Text, TextInput } from '../components';
+import { styles } from '../constants';
 
 const validationSchema = yup.object({
 	username: yup.string().required().min(8).max(20).label('Username'),
@@ -14,15 +15,8 @@ export default Login = ({ navigation }) => {
 	const { login } = useContext(AuthContext);
 
 	return (
-		<Screen style={{ alignItems: 'center', justifyContent: 'center' }}>
-			<Text
-				color='blue'
-				style={{
-					fontFamily: 'roboto-black',
-					fontSize: 30,
-					marginBottom: 30,
-					textTransform: 'uppercase',
-				}}>
+		<Screen style={styles.center}>
+			<Text color='blue' style={[styles.title, { marginBottom: 30 }]}>
 				Login Form
 			</Text>
 			<Form
