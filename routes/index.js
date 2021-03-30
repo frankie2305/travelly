@@ -1,3 +1,3 @@
-import AuthStack from './AuthStack';
+import Navigator from './Navigator';
 
-export { AuthStack };
+export { Navigator };

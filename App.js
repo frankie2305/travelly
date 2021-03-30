@@ -9,7 +9,7 @@ import {
 	Roboto_900Black,
 } from '@expo-google-fonts/roboto';
 import { AuthContextProvider } from './contexts';
-import { AuthStack } from './routes';
+import { Navigator } from './routes';
 
 export default App = () => {
 	const [fontsLoaded] = useFonts({
@@ -23,7 +23,7 @@ export default App = () => {
 	return (
 		<AuthContextProvider>
 			<NavigationContainer>
-				<AuthStack />
+				<Navigator />
 			</NavigationContainer>
 		</AuthContextProvider>
 	);
