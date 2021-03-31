@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../contexts';
-import { Home } from '../screens';
 import AuthStack from './AuthStack';
+import Drawer from './Drawer';
 
 const Navigator = () => {
 	const { isLoggedIn } = useContext(AuthContext);
 
-	return isLoggedIn ? <Home /> : <AuthStack />;
+	return isLoggedIn ? <Drawer /> : <AuthStack />;
 };
 
 export default Navigator;
