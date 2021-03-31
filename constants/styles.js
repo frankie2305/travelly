@@ -5,6 +5,14 @@ export default styles = StyleSheet.create({
 		alignItems: 'center',
 		justifyContent: 'center',
 	},
+	label: {
+		fontFamily: 'roboto-bold',
+		fontSize: 24,
+		textTransform: 'uppercase',
+	},
+	row: {
+		flexDirection: 'row',
+	},
 	title: {
 		fontFamily: 'roboto-black',
 		fontSize: 30,

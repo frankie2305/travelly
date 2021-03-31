@@ -101,7 +101,7 @@ export default Signup = ({ navigation }) => (
 						icon='person-add'
 						title='Sign up'
 					/>
-					<View style={{ flexDirection: 'row', alignSelf: 'center' }}>
+					<View style={[styles.row, styles.center]}>
 						<Text color='gray' style={{ marginTop: 10 }}>
 							Already have an account?{' '}
 						</Text>

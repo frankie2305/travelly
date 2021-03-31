@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import Text from './Text';
-import { colors } from '../constants';
+import { colors, styles } from '../constants';
 
 export default Button = ({
 	color = 'blue',
@@ -42,7 +42,9 @@ export default Button = ({
 		<TouchableOpacity onPress={onPress}>
 			<View
 				style={[
-					styles.btn,
+					styles.row,
+					styles.center,
+					extraStyles.btn,
 					{
 						backgroundColor: colors[color],
 					},
@@ -52,7 +54,7 @@ export default Button = ({
 					size={24}
 					color={colors[iconColor]}
 				/>
-				<Text color={titleColor} style={styles.title}>
+				<Text color={titleColor} style={styles.label}>
 					{' '}
 					{title}
 				</Text>
@@ -60,11 +62,8 @@ export default Button = ({
 		</TouchableOpacity>
 	);
 
-const styles = StyleSheet.create({
+const extraStyles = StyleSheet.create({
 	btn: {
-		flexDirection: 'row',
-		alignItems: 'center',
-		justifyContent: 'center',
 		borderWidth: StyleSheet.hairlineWidth,
 		borderRadius: 10,
 		padding: 10,
@@ -72,10 +71,5 @@ const styles = StyleSheet.create({
 		shadowOffset: { width: 1, height: 1 },
 		shadowOpacity: 0.5,
 		shadowRadius: 10,
-	},
-	title: {
-		fontFamily: 'roboto-black',
-		fontSize: 20,
-		textTransform: 'uppercase',
 	},
 });

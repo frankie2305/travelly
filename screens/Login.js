@@ -76,11 +76,7 @@ export default Login = ({ navigation }) => {
 							icon='login'
 							title='Log in'
 						/>
-						<View
-							style={{
-								flexDirection: 'row',
-								alignSelf: 'center',
-							}}>
+						<View style={[styles.row, styles.center]}>
 							<Text color='gray' style={{ marginTop: 10 }}>
 								Don't have an account?{' '}
 							</Text>

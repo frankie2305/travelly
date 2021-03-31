@@ -1,8 +1,9 @@
 import React from 'react';
 import { Screen, Text } from '../components';
+import { styles } from '../constants';
 
 export default Home = () => (
-	<Screen style={{ alignItems: 'center', justifyContent: 'center' }}>
+	<Screen style={styles.center}>
 		<Text
 			color='blue'
 			style={{
