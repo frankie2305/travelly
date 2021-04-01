@@ -1,18 +1,19 @@
 import React, { useContext } from 'react';
-import { Alert } from 'react-native';
+import { View, Alert } from 'react-native';
 import {
 	createDrawerNavigator,
 	DrawerContentScrollView,
 	DrawerItem,
 } from '@react-navigation/drawer';
 import { MaterialIcons } from '@expo/vector-icons';
-import { AuthContext } from '../contexts';
+import { AuthContext, UserContext } from '../contexts';
 import HomeStack from './HomeStack';
+import { Text } from '../components';
 import { colors, styles } from '../constants';
 
 const Drawer = createDrawerNavigator();
 
-const DrawerContent = ({ logout, state, navigation, ...props }) => {
+const DrawerContent = ({ username, logout, state, navigation, ...props }) => {
 	const icons = ['home'];
 
 	return (
@@ -23,7 +24,12 @@ const DrawerContent = ({ logout, state, navigation, ...props }) => {
 				flex: 1,
 				justifyContent: 'space-between',
 			}}>
-			<>
+			<View>
+				<Text
+					color='blue'
+					style={{ marginBottom: '10%', textAlign: 'center' }}>
+					{username}
+				</Text>
 				{state.routes.map((route, index) => (
 					<DrawerItem
 						key={route.key}
@@ -42,7 +48,7 @@ const DrawerContent = ({ logout, state, navigation, ...props }) => {
 						activeTintColor={colors.white}
 					/>
 				))}
-			</>
+			</View>
 			<DrawerItem
 				style={{ marginBottom: '10%' }}
 				label='log out'
@@ -75,11 +81,16 @@ const DrawerContent = ({ logout, state, navigation, ...props }) => {
 
 export default DrawerNavigator = () => {
 	const { logout } = useContext(AuthContext);
+	const { user } = useContext(UserContext);
 
 	return (
 		<Drawer.Navigator
 			drawerContent={props => (
-				<DrawerContent {...props} logout={logout} />
+				<DrawerContent
+					{...props}
+					username={user.username}
+					logout={logout}
+				/>
 			)}>
 			<Drawer.Screen name='Home' component={HomeStack} />
 		</Drawer.Navigator>

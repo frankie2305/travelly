@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { View, Alert, TouchableOpacity } from 'react-native';
 import * as yup from 'yup';
 import * as SecureStore from 'expo-secure-store';
-import { AuthContext } from '../contexts';
+import { AuthContext, UserContext } from '../contexts';
 import { Button, Form, Screen, Text, TextInput } from '../components';
 import { styles } from '../constants';
 
@@ -13,6 +13,7 @@ const validationSchema = yup.object({
 
 export default Login = ({ navigation }) => {
 	const { login } = useContext(AuthContext);
+	const { setUser } = useContext(UserContext);
 
 	return (
 		<Screen style={styles.center}>
@@ -33,6 +34,7 @@ export default Login = ({ navigation }) => {
 									user.password === password
 							)
 						) {
+							setUser({ username, password });
 							login();
 						} else {
 							Alert.alert(
