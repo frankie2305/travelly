@@ -18,9 +18,7 @@ export default App = () => {
 		'roboto-black': Roboto_900Black,
 	});
 
-	if (!fontsLoaded) return <AppLoading />;
-
-	return (
+	return fontsLoaded ? (
 		<AuthContextProvider>
 			<UserContextProvider>
 				<NavigationContainer>
@@ -28,5 +26,7 @@ export default App = () => {
 				</NavigationContainer>
 			</UserContextProvider>
 		</AuthContextProvider>
+	) : (
+		<AppLoading />
 	);
 };
