@@ -13,7 +13,7 @@ export default Header = ({ navigation, icon, title }) => (
 			color={colors.white}
 			onPress={navigation.openDrawer}
 		/>
-		<View style={styles.row}>
+		<View style={[styles.row, styles.center]}>
 			<MaterialIcons name={icon} size={24} color={colors.white} />
 			<Text color='white' style={styles.label}>
 				{' '}
