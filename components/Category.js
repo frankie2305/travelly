@@ -1,18 +1,13 @@
 import React from 'react';
-import {
-	StyleSheet,
-	View,
-	Platform,
-	TouchableNativeFeedback,
-	TouchableOpacity,
-} from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import Text from './Text';
+import Touchable from './Touchable';
 import { colors, styles } from '../constants';
 
-export default Category = ({ color, icon, label, onPress }) =>
-	Platform.OS === 'android' ? (
-		<TouchableNativeFeedback style={styles.center} onPress={onPress}>
+export default Category = ({ color, icon, label, onPress }) => (
+	<Touchable style={styles.center} onPress={onPress}>
+		<View>
 			<View style={extraStyles.container}>
 				<View
 					style={[
@@ -26,24 +21,9 @@ export default Category = ({ color, icon, label, onPress }) =>
 			<Text color='gray' style={extraStyles.label}>
 				{label}
 			</Text>
-		</TouchableNativeFeedback>
-	) : (
-		<TouchableOpacity style={styles.center} onPress={onPress}>
-			<View style={extraStyles.container}>
-				<View
-					style={[
-						styles.center,
-						extraStyles.icon,
-						{ backgroundColor: colors[color] },
-					]}>
-					<MaterialIcons name={icon} size={30} color={colors.white} />
-				</View>
-			</View>
-			<Text color='gray' style={extraStyles.label}>
-				{label}
-			</Text>
-		</TouchableOpacity>
-	);
+		</View>
+	</Touchable>
+);
 
 const extraStyles = StyleSheet.create({
 	container: {
@@ -65,5 +45,6 @@ const extraStyles = StyleSheet.create({
 	label: {
 		fontSize: 12,
 		marginTop: 10,
+		textAlign: 'center',
 	},
 });
