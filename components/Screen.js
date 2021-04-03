@@ -5,7 +5,6 @@ import {
 	SafeAreaView,
 	StyleSheet,
 } from 'react-native';
-import Constants from 'expo-constants';
 
 export default Screen = ({ style, children }) => (
 	<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -16,6 +15,5 @@ export default Screen = ({ style, children }) => (
 const styles = StyleSheet.create({
 	screen: {
 		flex: 1,
-		marginTop: Constants.statusBarHeight,
 	},
 });
