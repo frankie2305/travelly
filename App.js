@@ -1,6 +1,7 @@
 import 'react-native-gesture-handler';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
+import { ActionSheetProvider } from '@expo/react-native-action-sheet';
 import AppLoading from 'expo-app-loading';
 import {
 	useFonts,
@@ -19,13 +20,15 @@ export default App = () => {
 	});
 
 	return fontsLoaded ? (
-		<AuthContextProvider>
-			<UserContextProvider>
-				<NavigationContainer>
-					<Navigator />
-				</NavigationContainer>
-			</UserContextProvider>
-		</AuthContextProvider>
+		<ActionSheetProvider>
+			<AuthContextProvider>
+				<UserContextProvider>
+					<NavigationContainer>
+						<Navigator />
+					</NavigationContainer>
+				</UserContextProvider>
+			</AuthContextProvider>
+		</ActionSheetProvider>
 	) : (
 		<AppLoading />
 	);
