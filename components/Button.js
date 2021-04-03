@@ -37,7 +37,7 @@ const extraStyles = StyleSheet.create({
 		borderWidth: StyleSheet.hairlineWidth,
 		borderRadius: 10,
 		padding: 10,
-		shadowColor: '#f2f2f2',
+		shadowColor: colors.white,
 		shadowOffset: { width: 1, height: 1 },
 		shadowOpacity: 0.5,
 		shadowRadius: 10,
