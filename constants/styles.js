@@ -27,6 +27,16 @@ export default styles = StyleSheet.create({
 	row: {
 		flexDirection: 'row',
 	},
+	shadow: {
+		elevation: 5,
+		shadowColor: colors.black,
+		shadowOffset: {
+			width: 5,
+			height: 5,
+		},
+		shadowOpacity: 0.5,
+		shadowRadius: 10,
+	},
 	title: {
 		fontFamily: 'roboto-black',
 		fontSize: 30,

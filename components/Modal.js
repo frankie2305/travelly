@@ -19,7 +19,7 @@ export default CustomModal = ({ city, category }) => {
 			visible={modalVisible}>
 			<View style={extraStyles.modal}>
 				<View style={extraStyles.modalDialog}>
-					<View style={extraStyles.modalContent}>
+					<View style={[styles.shadow, extraStyles.modalContent]}>
 						<View style={extraStyles.modalHeader}>
 							<MaterialIcons
 								style={extraStyles.close}
@@ -149,14 +149,6 @@ const extraStyles = StyleSheet.create({
 		backgroundColor: colors.white,
 		borderColor: 'transparent',
 		borderRadius: 10,
-		elevation: 5,
-		shadowColor: colors.black,
-		shadowOffset: {
-			width: 5,
-			height: 5,
-		},
-		shadowOpacity: 0.5,
-		shadowRadius: 10,
 	},
 	modalHeader: {
 		backgroundColor: colors.blue,

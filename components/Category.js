@@ -8,7 +8,7 @@ import { colors, styles } from '../constants';
 export default Category = ({ color, icon, label, onPress }) => (
 	<Touchable style={styles.center} onPress={onPress}>
 		<View>
-			<View style={extraStyles.container}>
+			<View style={[styles.shadow, extraStyles.container]}>
 				<View
 					style={[
 						styles.center,
@@ -29,14 +29,6 @@ const extraStyles = StyleSheet.create({
 	container: {
 		width: 70,
 		height: 70,
-		elevation: 5,
-		shadowColor: colors.black,
-		shadowOffset: {
-			width: 5,
-			height: 5,
-		},
-		shadowOpacity: 0.5,
-		shadowRadius: 10,
 	},
 	icon: {
 		flex: 1,
