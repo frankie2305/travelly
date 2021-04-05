@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { View, ImageBackground, Alert } from 'react-native';
 import { useActionSheet } from '@expo/react-native-action-sheet';
 import { MaterialIcons } from '@expo/vector-icons';
-import { Category, Screen, Text, Touchable } from '../components';
+import { ModalContext } from '../contexts';
+import { Category, Modal, Screen, Text, Touchable } from '../components';
 import { colors, styles } from '../constants';
 
 export default Home = () => {
@@ -11,12 +12,14 @@ export default Home = () => {
 		{ label: 'Melbourne', value: 'melbourne' },
 	];
 	const { showActionSheetWithOptions } = useActionSheet();
+	const { setModalVisible } = useContext(ModalContext);
 	const [city, setCity] = useState('');
 	const cityAlert = () => Alert.alert('Oops!', 'Please choose a city first.');
 	const [category, setCategory] = useState('');
 
 	return (
 		<Screen>
+			<Modal city={city} category={category} />
 			<View style={{ flex: 1 }}>
 				<ImageBackground
 					source={require('../assets/home.png')}
@@ -71,8 +74,10 @@ export default Home = () => {
 						icon='restaurant'
 						label='Restaurants'
 						onPress={() => {
-							if (city) setCategory('restaurants');
-							else cityAlert();
+							if (city) {
+								setCategory('restaurants');
+								setModalVisible(true);
+							} else cityAlert();
 						}}
 					/>
 					<Category
@@ -80,8 +85,10 @@ export default Home = () => {
 						icon='hotel'
 						label='Hotels'
 						onPress={() => {
-							if (city) setCategory('hotels');
-							else cityAlert();
+							if (city) {
+								setCategory('hotels');
+								setModalVisible(true);
+							} else cityAlert();
 						}}
 					/>
 				</View>
@@ -91,8 +98,10 @@ export default Home = () => {
 						icon='attractions'
 						label='Attractions'
 						onPress={() => {
-							if (city) setCategory('attractions');
-							else cityAlert();
+							if (city) {
+								setCategory('attractions');
+								setModalVisible(true);
+							} else cityAlert();
 						}}
 					/>
 					<Category
@@ -100,8 +109,10 @@ export default Home = () => {
 						icon='local-activity'
 						label='Things to do'
 						onPress={() => {
-							if (city) setCategory('activities');
-							else cityAlert();
+							if (city) {
+								setCategory('activities');
+								setModalVisible(true);
+							} else cityAlert();
 						}}
 					/>
 				</View>
