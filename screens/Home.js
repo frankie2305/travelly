@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, ImageBackground } from 'react-native';
+import { StyleSheet, View, ImageBackground, Alert } from 'react-native';
 import { useActionSheet } from '@expo/react-native-action-sheet';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Category, Screen, Text, Touchable } from '../components';
@@ -10,8 +10,10 @@ export default Home = () => {
 		{ label: 'Sydney', value: 'sydney' },
 		{ label: 'Melbourne', value: 'melbourne' },
 	];
-	const [city, setCity] = useState('');
 	const { showActionSheetWithOptions } = useActionSheet();
+	const [city, setCity] = useState('');
+	const cityAlert = () => Alert.alert('Oops!', 'Please choose a city first.');
+	const [category, setCategory] = useState('');
 
 	return (
 		<Screen>
@@ -67,13 +69,19 @@ export default Home = () => {
 						color='red'
 						icon='restaurant'
 						label='Restaurants'
-						onPress={() => console.log('Restaurants')}
+						onPress={() => {
+							if (city) setCategory('restaurants');
+							else cityAlert();
+						}}
 					/>
 					<Category
 						color='green'
 						icon='hotel'
 						label='Hotels'
-						onPress={() => console.log('Hotels')}
+						onPress={() => {
+							if (city) setCategory('hotels');
+							else cityAlert();
+						}}
 					/>
 				</View>
 				<View style={[styles.row, { justifyContent: 'space-around' }]}>
@@ -81,13 +89,19 @@ export default Home = () => {
 						color='blue'
 						icon='attractions'
 						label='Attractions'
-						onPress={() => console.log('Attractions')}
+						onPress={() => {
+							if (city) setCategory('attractions');
+							else cityAlert();
+						}}
 					/>
 					<Category
 						color='yellow'
 						icon='local-activity'
 						label='Things to do'
-						onPress={() => console.log('Things to do')}
+						onPress={() => {
+							if (city) setCategory('activities');
+							else cityAlert();
+						}}
 					/>
 				</View>
 			</View>
@@ -101,7 +115,7 @@ const extraStyles = StyleSheet.create({
 		borderWidth: StyleSheet.hairlineWidth,
 		borderRadius: 10,
 		padding: 10,
-		shadowColor: '#f2f2f2',
+		shadowColor: colors.white,
 		shadowOffset: { width: 1, height: 1 },
 		shadowOpacity: 0.5,
 		shadowRadius: 10,
