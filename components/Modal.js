@@ -6,10 +6,10 @@ import { ModalContext } from '../contexts';
 import Card from './Card';
 import Text from './Text';
 import { colors, db, styles } from '../constants';
+import { capitalize } from '../utils';
 
 export default CustomModal = ({ city, category }) => {
 	const { modalVisible, setModalVisible } = useContext(ModalContext);
-	const capitalize = string => string[0].toUpperCase() + string.substring(1);
 
 	return (
 		<Modal

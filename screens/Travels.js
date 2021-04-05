@@ -4,6 +4,7 @@ import Constants from 'expo-constants';
 import { UserContext } from '../contexts';
 import { Card, Text } from '../components';
 import { styles } from '../constants';
+import { capitalize } from '../utils';
 
 export default Travels = () => {
 	const { travels } = useContext(UserContext);
@@ -39,9 +40,7 @@ export default Travels = () => {
 							<Text
 								color={index % 2 === 0 ? 'white' : 'black'}
 								style={{ fontSize: 14 }}>
-								Destination:{' '}
-								{item.city[0].toUpperCase() +
-									item.city.substring(1)}
+								Destination: {capitalize(item.city)}
 							</Text>
 							<Text
 								color={index % 2 === 0 ? 'white' : 'black'}
