@@ -8,13 +8,14 @@ import {
 import { MaterialIcons } from '@expo/vector-icons';
 import { AuthContext, UserContext } from '../contexts';
 import HomeStack from './HomeStack';
+import TravelsStack from './TravelsStack';
 import { Text } from '../components';
 import { colors, styles } from '../constants';
 
 const Drawer = createDrawerNavigator();
 
 const DrawerContent = ({ username, logout, state, navigation, ...props }) => {
-	const icons = ['home'];
+	const icons = ['home', 'luggage'];
 
 	return (
 		<DrawerContentScrollView
@@ -53,11 +54,12 @@ const DrawerContent = ({ username, logout, state, navigation, ...props }) => {
 				style={{ marginBottom: '10%' }}
 				label='log out'
 				labelStyle={styles.label}
-				icon={() => (
+				icon={({ size, color }) => (
 					<MaterialIcons
-						name='logout'
-						size={24}
 						style={{ marginLeft: '10%' }}
+						name='logout'
+						size={size}
+						color={color}
 					/>
 				)}
 				onPress={() =>
@@ -93,6 +95,7 @@ export default DrawerNavigator = () => {
 				/>
 			)}>
 			<Drawer.Screen name='Home' component={HomeStack} />
+			<Drawer.Screen name='Travels' component={TravelsStack} />
 		</Drawer.Navigator>
 	);
 };
