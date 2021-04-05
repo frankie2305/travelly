@@ -28,7 +28,9 @@ export default CustomModal = ({ city, category }) => {
 								color={colors.white}
 								onPress={() => setModalVisible(false)}
 							/>
-							<Text color='white' style={{ textAlign: 'center' }}>
+							<Text
+								color='white'
+								style={extraStyles.modalHeaderText}>
 								Press + at the end of each item to add it to
 								your travel(s)
 							</Text>
@@ -48,22 +50,21 @@ export default CustomModal = ({ city, category }) => {
 											<View
 												style={[
 													styles.row,
-													{
-														justifyContent:
-															'space-between',
-													},
+													extraStyles.cardContainer,
 												]}>
-												<View style={{ flex: 1 }}>
+												<View
+													style={
+														extraStyles.modalBodyTextContainer
+													}>
 													<Text
 														color={
 															index % 2 === 0
 																? 'white'
 																: 'black'
 														}
-														style={{
-															fontFamily:
-																'roboto-bold',
-														}}>
+														style={
+															extraStyles.modalBodyTitleText
+														}>
 														{item.name}
 													</Text>
 													<View style={styles.row}>
@@ -98,9 +99,9 @@ export default CustomModal = ({ city, category }) => {
 																	? 'white'
 																	: 'black'
 															}
-															style={{
-																fontSize: 12,
-															}}>
+															style={
+																extraStyles.modalBodyText
+															}>
 															{item.stars && ', '}
 															{item.summary}
 														</Text>
@@ -132,13 +133,13 @@ export default CustomModal = ({ city, category }) => {
 };
 
 const extraStyles = StyleSheet.create({
+	close: {
+		alignSelf: 'center',
+		marginBottom: 10,
+	},
 	modal: {
 		flex: 1,
 		backgroundColor: 'rgba(0, 0, 0, 0.5)',
-	},
-	modalBody: {
-		paddingHorizontal: 5,
-		paddingVertical: 10,
 	},
 	modalDialog: {
 		flex: 1,
@@ -157,8 +158,25 @@ const extraStyles = StyleSheet.create({
 		paddingHorizontal: 5,
 		paddingVertical: 10,
 	},
-	close: {
-		alignSelf: 'flex-end',
-		marginBottom: 10,
+	modalHeaderText: {
+		fontFamily: 'roboto-black',
+		fontSize: 20,
+		textAlign: 'center',
+	},
+	modalBody: {
+		paddingHorizontal: 5,
+		paddingVertical: 10,
+	},
+	cardContainer: {
+		justifyContent: 'space-between',
+	},
+	modalBodyTextContainer: {
+		flex: 1,
+	},
+	modalBodyTitleText: {
+		fontFamily: 'roboto-bold',
+	},
+	modalBodyText: {
+		fontSize: 12,
 	},
 });
