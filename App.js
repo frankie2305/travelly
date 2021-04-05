@@ -9,7 +9,11 @@ import {
 	Roboto_700Bold,
 	Roboto_900Black,
 } from '@expo-google-fonts/roboto';
-import { AuthContextProvider, UserContextProvider } from './contexts';
+import {
+	AuthContextProvider,
+	ModalContextProvider,
+	UserContextProvider,
+} from './contexts';
 import { Navigator } from './routes';
 
 export default App = () => {
@@ -22,11 +26,13 @@ export default App = () => {
 	return fontsLoaded ? (
 		<ActionSheetProvider>
 			<AuthContextProvider>
-				<UserContextProvider>
-					<NavigationContainer>
-						<Navigator />
-					</NavigationContainer>
-				</UserContextProvider>
+				<ModalContextProvider>
+					<UserContextProvider>
+						<NavigationContainer>
+							<Navigator />
+						</NavigationContainer>
+					</UserContextProvider>
+				</ModalContextProvider>
 			</AuthContextProvider>
 		</ActionSheetProvider>
 	) : (
