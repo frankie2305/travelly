@@ -3,14 +3,27 @@ import { View, ImageBackground, Alert } from 'react-native';
 import { useActionSheet } from '@expo/react-native-action-sheet';
 import { MaterialIcons } from '@expo/vector-icons';
 import { ModalContext } from '../contexts';
-import { Category, Modal, Screen, Text, Touchable } from '../components';
+import {
+	Button,
+	Category,
+	Modal,
+	Screen,
+	Text,
+	Touchable,
+} from '../components';
 import { colors, styles } from '../constants';
 
-export default Home = () => {
+export default Home = ({ navigation }) => {
 	const cities = [
 		{ label: 'Sydney', value: 'sydney' },
 		{ label: 'Melbourne', value: 'melbourne' },
 	];
+	const cityImages = {
+		// By Benh LIEU SONG (Flickr) - Sydney&#039;s Landmarks 2, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=82284289
+		sydney: require('../assets/sydney.jpg'),
+		// By Montage by HappyWaldo - Own work by uploader created from licence-free images from Commons., CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=78098825
+		melbourne: require('../assets/melbourne.jpg'),
+	};
 	const { showActionSheetWithOptions } = useActionSheet();
 	const { setModalVisible } = useContext(ModalContext);
 	const [city, setCity] = useState('');
@@ -22,7 +35,9 @@ export default Home = () => {
 			<Modal city={city} category={category} />
 			<View style={{ flex: 1 }}>
 				<ImageBackground
-					source={require('../assets/home.png')}
+					source={
+						city ? cityImages[city] : require('../assets/home.png')
+					}
 					resizeMode='cover'
 					style={[styles.center, { flex: 1 }]}>
 					<Touchable
@@ -116,6 +131,12 @@ export default Home = () => {
 						}}
 					/>
 				</View>
+			</View>
+			<View style={styles.center}>
+				<Button
+					title='Go to my travels'
+					onPress={() => navigation.navigate('Travels')}
+				/>
 			</View>
 		</Screen>
 	);
