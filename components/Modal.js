@@ -9,6 +9,7 @@ import { colors, db, styles } from '../constants';
 
 export default CustomModal = ({ city, category }) => {
 	const { modalVisible, setModalVisible } = useContext(ModalContext);
+	const capitalize = string => string[0].toUpperCase() + string.substring(1);
 
 	return (
 		<Modal
@@ -36,6 +37,15 @@ export default CustomModal = ({ city, category }) => {
 							</Text>
 						</View>
 						<View style={extraStyles.modalBody}>
+							<Text
+								color='blue'
+								style={extraStyles.modalHeaderText}>
+								{category &&
+									(category === 'activities'
+										? 'Things to do'
+										: capitalize(category))}{' '}
+								at {city && capitalize(city)}
+							</Text>
 							{city && category && (
 								<FlatList
 									data={db[city][category]}
@@ -147,6 +157,7 @@ const extraStyles = StyleSheet.create({
 		marginTop: Constants.statusBarHeight * 3,
 	},
 	modalContent: {
+		flex: 1,
 		backgroundColor: colors.white,
 		borderColor: 'transparent',
 		borderRadius: 10,
@@ -164,6 +175,7 @@ const extraStyles = StyleSheet.create({
 		textAlign: 'center',
 	},
 	modalBody: {
+		flex: 1,
 		paddingHorizontal: 5,
 		paddingVertical: 10,
 	},
