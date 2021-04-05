@@ -8,7 +8,7 @@ import {
 import { MaterialIcons } from '@expo/vector-icons';
 import { AuthContext, UserContext } from '../contexts';
 import HomeStack from './HomeStack';
-import TravelsStack from './TravelsStack';
+import TravelStack from './TravelStack';
 import { Text } from '../components';
 import { colors, styles } from '../constants';
 
@@ -95,7 +95,7 @@ export default DrawerNavigator = () => {
 				/>
 			)}>
 			<Drawer.Screen name='Home' component={HomeStack} />
-			<Drawer.Screen name='Travels' component={TravelsStack} />
+			<Drawer.Screen name='Travels' component={TravelStack} />
 		</Drawer.Navigator>
 	);
 };
