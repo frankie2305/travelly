@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { View } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import Text from './Text';
 import Touchable from './Touchable';
@@ -18,7 +18,7 @@ export default Button = ({
 			style={[
 				styles.row,
 				styles.center,
-				extraStyles.btn,
+				styles.btn,
 				{
 					backgroundColor: colors[color],
 				},
@@ -31,15 +31,3 @@ export default Button = ({
 		</View>
 	</Touchable>
 );
-
-const extraStyles = StyleSheet.create({
-	btn: {
-		borderWidth: StyleSheet.hairlineWidth,
-		borderRadius: 10,
-		padding: 10,
-		shadowColor: colors.white,
-		shadowOffset: { width: 1, height: 1 },
-		shadowOpacity: 0.5,
-		shadowRadius: 10,
-	},
-});

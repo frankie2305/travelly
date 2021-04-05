@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, ImageBackground, Alert } from 'react-native';
+import { View, ImageBackground, Alert } from 'react-native';
 import { useActionSheet } from '@expo/react-native-action-sheet';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Category, Screen, Text, Touchable } from '../components';
@@ -47,7 +47,8 @@ export default Home = () => {
 							style={[
 								styles.row,
 								styles.center,
-								extraStyles.btn,
+								styles.btn,
+								{ backgroundColor: colors.white },
 							]}>
 							<Text color='gray'>
 								{city
@@ -108,16 +109,3 @@ export default Home = () => {
 		</Screen>
 	);
 };
-
-const extraStyles = StyleSheet.create({
-	btn: {
-		backgroundColor: colors.white,
-		borderWidth: StyleSheet.hairlineWidth,
-		borderRadius: 10,
-		padding: 10,
-		shadowColor: colors.white,
-		shadowOffset: { width: 1, height: 1 },
-		shadowOpacity: 0.5,
-		shadowRadius: 10,
-	},
-});
