@@ -2,11 +2,11 @@ import React, { useContext } from 'react';
 import { View, FlatList } from 'react-native';
 import Constants from 'expo-constants';
 import { UserContext } from '../contexts';
-import { Card, Text } from '../components';
+import { Card, Text, Touchable } from '../components';
 import { styles } from '../constants';
 import { capitalize } from '../utils';
 
-export default Travels = () => {
+export default Travels = ({ navigation }) => {
 	const { travels } = useContext(UserContext);
 
 	return (
@@ -30,32 +30,39 @@ export default Travels = () => {
 				data={travels}
 				keyExtractor={item => item.name}
 				renderItem={({ item, index }) => (
-					<Card color={index % 2 === 0 ? 'black' : 'white'}>
-						<View style={{ flex: 1 }}>
-							<Text
-								color={index % 2 === 0 ? 'white' : 'black'}
-								style={{ fontFamily: 'roboto-bold' }}>
-								{item.name}
-							</Text>
-							<Text
-								color={index % 2 === 0 ? 'white' : 'black'}
-								style={{ fontSize: 14 }}>
-								Destination: {capitalize(item.city)}
-							</Text>
-							<Text
-								color={index % 2 === 0 ? 'white' : 'black'}
-								style={{ fontSize: 12 }}>
-								{item.restaurants.length} restaurant
-								{item.restaurants.length !== 1 && 's'},{' '}
-								{item.hotels.length} hotel
-								{item.hotels.length !== 1 && 's'},{' '}
-								{item.attractions.length} attraction
-								{item.attractions.length !== 1 && 's'},{' '}
-								{item.activities.length} thing
-								{item.activities.length !== 1 && 's'} to do
-							</Text>
-						</View>
-					</Card>
+					<Touchable
+						onPress={() =>
+							navigation.navigate('TravelDetails', {
+								name: item.name,
+							})
+						}>
+						<Card color={index % 2 === 0 ? 'black' : 'white'}>
+							<View style={{ flex: 1 }}>
+								<Text
+									color={index % 2 === 0 ? 'white' : 'black'}
+									style={{ fontFamily: 'roboto-bold' }}>
+									{item.name}
+								</Text>
+								<Text
+									color={index % 2 === 0 ? 'white' : 'black'}
+									style={{ fontSize: 14 }}>
+									Destination: {capitalize(item.city)}
+								</Text>
+								<Text
+									color={index % 2 === 0 ? 'white' : 'black'}
+									style={{ fontSize: 12 }}>
+									{item.restaurants.length} restaurant
+									{item.restaurants.length !== 1 && 's'},{' '}
+									{item.hotels.length} hotel
+									{item.hotels.length !== 1 && 's'},{' '}
+									{item.attractions.length} attraction
+									{item.attractions.length !== 1 && 's'},{' '}
+									{item.activities.length} thing
+									{item.activities.length !== 1 && 's'} to do
+								</Text>
+							</View>
+						</Card>
+					</Touchable>
 				)}
 			/>
 		</View>
