@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { View, FlatList, Linking } from 'react-native';
+import { View, ScrollView, Linking } from 'react-native';
 import Constants from 'expo-constants';
 import { MaterialIcons } from '@expo/vector-icons';
 import { UserContext } from '../contexts';
@@ -23,8 +23,8 @@ export default TravelDetails = ({ route }) => {
 	const activities = travel.activities.map(name =>
 		db[city].activities.find(item => item.name === name)
 	);
-	const renderItem = ({ item, index }) => (
-		<Card color={index % 2 == 0 ? 'black' : 'white'}>
+	const renderItem = (item, index) => (
+		<Card key={item.name} color={index % 2 == 0 ? 'black' : 'white'}>
 			<View
 				style={[
 					styles.row,
@@ -226,7 +226,7 @@ export default TravelDetails = ({ route }) => {
 	);
 
 	return (
-		<View
+		<ScrollView
 			style={{
 				flex: 1,
 				marginVertical: Constants.statusBarHeight,
@@ -242,140 +242,114 @@ export default TravelDetails = ({ route }) => {
 				]}>
 				Travel details of {name}
 			</Text>
-			<View style={{ flex: 1 }}>
-				<View style={{ flex: 1 }}>
-					<Text />
-					<View
-						style={[
-							styles.row,
-							{
-								justifyContent: 'space-between',
-							},
-						]}>
-						<Text
-							color='red'
-							style={[styles.label, { textTransform: 'none' }]}>
-							Restaurants
-						</Text>
-						<MaterialIcons
-							name='add'
-							size={30}
-							color={colors.red}
-							onPress={() => console.log('added restaurants')}
-						/>
-					</View>
-					{restaurants.length === 0 ? (
-						<Text color='pink' style={{ textAlign: 'center' }}>
-							You don't have any restaurants for this travel yet.
-						</Text>
-					) : (
-						<FlatList
-							data={restaurants}
-							keyExtractor={travel => travel.name}
-							renderItem={renderItem}
-						/>
-					)}
-				</View>
-				<View style={{ flex: 1 }}>
-					<Text />
-					<View
-						style={[
-							styles.row,
-							{
-								justifyContent: 'space-between',
-							},
-						]}>
-						<Text
-							color='green'
-							style={[styles.label, { textTransform: 'none' }]}>
-							Hotels
-						</Text>
-						<MaterialIcons
-							name='add'
-							size={30}
-							color={colors.green}
-							onPress={() => console.log('added hotels')}
-						/>
-					</View>
-					{hotels.length === 0 ? (
-						<Text color='teal' style={{ textAlign: 'center' }}>
-							You don't have any hotels for this travel yet.
-						</Text>
-					) : (
-						<FlatList
-							data={hotels}
-							keyExtractor={travel => travel.name}
-							renderItem={renderItem}
-						/>
-					)}
-				</View>
-				<View style={{ flex: 1 }}>
-					<Text />
-					<View
-						style={[
-							styles.row,
-							{
-								justifyContent: 'space-between',
-							},
-						]}>
-						<Text
-							color='blue'
-							style={[styles.label, { textTransform: 'none' }]}>
-							Attractions
-						</Text>
-						<MaterialIcons
-							name='add'
-							size={30}
-							color={colors.blue}
-							onPress={() => console.log('added attractions')}
-						/>
-					</View>
-					{attractions.length === 0 ? (
-						<Text color='cyan' style={{ textAlign: 'center' }}>
-							You don't have any attractions for this travel yet.
-						</Text>
-					) : (
-						<FlatList
-							data={attractions}
-							keyExtractor={travel => travel.name}
-							renderItem={renderItem}
-						/>
-					)}
-				</View>
-				<View style={{ flex: 1 }}>
-					<Text />
-					<View
-						style={[
-							styles.row,
-							{
-								justifyContent: 'space-between',
-							},
-						]}>
-						<Text
-							color='yellow'
-							style={[styles.label, { textTransform: 'none' }]}>
-							Things to do
-						</Text>
-						<MaterialIcons
-							name='add'
-							size={30}
-							color={colors.yellow}
-							onPress={() => console.log('added things to do')}
-						/>
-					</View>
-					{activities.length === 0 ? (
-						<Text color='orange' style={{ textAlign: 'center' }}>
-							You don't have any things to do for this travel yet.
-						</Text>
-					) : (
-						<FlatList
-							data={activities}
-							keyExtractor={travel => travel.name}
-							renderItem={renderItem}
-						/>
-					)}
-				</View>
+			<Text />
+			<View
+				style={[
+					styles.row,
+					{
+						justifyContent: 'space-between',
+					},
+				]}>
+				<Text
+					color='red'
+					style={[styles.label, { textTransform: 'none' }]}>
+					Restaurants
+				</Text>
+				<MaterialIcons
+					name='add'
+					size={30}
+					color={colors.red}
+					onPress={() => console.log('added restaurants')}
+				/>
 			</View>
+			{restaurants.length === 0 ? (
+				<Text color='pink' style={{ textAlign: 'center' }}>
+					You don't have any restaurants for this travel yet.
+				</Text>
+			) : (
+				restaurants.map((item, index) => renderItem(item, index))
+			)}
+			<Text />
+			<View
+				style={[
+					styles.row,
+					{
+						justifyContent: 'space-between',
+					},
+				]}>
+				<Text
+					color='green'
+					style={[styles.label, { textTransform: 'none' }]}>
+					Hotels
+				</Text>
+				<MaterialIcons
+					name='add'
+					size={30}
+					color={colors.green}
+					onPress={() => console.log('added hotels')}
+				/>
+			</View>
+			{hotels.length === 0 ? (
+				<Text color='teal' style={{ textAlign: 'center' }}>
+					You don't have any hotels for this travel yet.
+				</Text>
+			) : (
+				hotels.map((item, index) => renderItem(item, index))
+			)}
+			<Text />
+			<View
+				style={[
+					styles.row,
+					{
+						justifyContent: 'space-between',
+					},
+				]}>
+				<Text
+					color='blue'
+					style={[styles.label, { textTransform: 'none' }]}>
+					Attractions
+				</Text>
+				<MaterialIcons
+					name='add'
+					size={30}
+					color={colors.blue}
+					onPress={() => console.log('added attractions')}
+				/>
+			</View>
+			{attractions.length === 0 ? (
+				<Text color='cyan' style={{ textAlign: 'center' }}>
+					You don't have any attractions for this travel yet.
+				</Text>
+			) : (
+				attractions.map((item, index) => renderItem(item, index))
+			)}
+			<Text />
+			<View
+				style={[
+					styles.row,
+					{
+						justifyContent: 'space-between',
+					},
+				]}>
+				<Text
+					color='yellow'
+					style={[styles.label, { textTransform: 'none' }]}>
+					Things to do
+				</Text>
+				<MaterialIcons
+					name='add'
+					size={30}
+					color={colors.yellow}
+					onPress={() => console.log('added things to do')}
+				/>
+			</View>
+			{activities.length === 0 ? (
+				<Text color='orange' style={{ textAlign: 'center' }}>
+					You don't have any things to do for this travel yet.
+				</Text>
+			) : (
+				activities.map((item, index) => renderItem(item, index))
+			)}
 			<Text />
 			<View style={styles.center}>
 				<Button
@@ -385,6 +359,6 @@ export default TravelDetails = ({ route }) => {
 					onPress={() => console.log('deleted travel')}
 				/>
 			</View>
-		</View>
+		</ScrollView>
 	);
 };
