@@ -3,7 +3,7 @@ import Card from './Card';
 import Category from './Category';
 import Form from './Form';
 import Header from './Header';
-import Modal from './Modal';
+import HomeModal from './HomeModal';
 import Screen from './Screen';
 import Text from './Text';
 import TextInput from './TextInput';
@@ -15,7 +15,7 @@ export {
 	Category,
 	Form,
 	Header,
-	Modal,
+	HomeModal,
 	Screen,
 	Text,
 	TextInput,

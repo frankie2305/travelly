@@ -6,7 +6,7 @@ import { ModalContext } from '../contexts';
 import {
 	Button,
 	Category,
-	Modal,
+	HomeModal,
 	Screen,
 	Text,
 	Touchable,
@@ -25,14 +25,14 @@ export default Home = ({ navigation }) => {
 		melbourne: require('../assets/melbourne.jpg'),
 	};
 	const { showActionSheetWithOptions } = useActionSheet();
-	const { setModalVisible } = useContext(ModalContext);
+	const { setHomeModalVisible } = useContext(ModalContext);
 	const [city, setCity] = useState('');
 	const cityAlert = () => Alert.alert('Oops!', 'Please choose a city first.');
 	const [category, setCategory] = useState('');
 
 	return (
 		<Screen>
-			<Modal city={city} category={category} />
+			<HomeModal city={city} category={category} />
 			<View style={{ flex: 1 }}>
 				<ImageBackground
 					source={
@@ -91,7 +91,7 @@ export default Home = ({ navigation }) => {
 						onPress={() => {
 							if (city) {
 								setCategory('restaurants');
-								setModalVisible(true);
+								setHomeModalVisible(true);
 							} else cityAlert();
 						}}
 					/>
@@ -102,7 +102,7 @@ export default Home = ({ navigation }) => {
 						onPress={() => {
 							if (city) {
 								setCategory('hotels');
-								setModalVisible(true);
+								setHomeModalVisible(true);
 							} else cityAlert();
 						}}
 					/>
@@ -115,7 +115,7 @@ export default Home = ({ navigation }) => {
 						onPress={() => {
 							if (city) {
 								setCategory('attractions');
-								setModalVisible(true);
+								setHomeModalVisible(true);
 							} else cityAlert();
 						}}
 					/>
@@ -126,7 +126,7 @@ export default Home = ({ navigation }) => {
 						onPress={() => {
 							if (city) {
 								setCategory('activities');
-								setModalVisible(true);
+								setHomeModalVisible(true);
 							} else cityAlert();
 						}}
 					/>

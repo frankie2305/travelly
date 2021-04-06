@@ -6,18 +6,18 @@ import { ModalContext } from '../contexts';
 import Card from './Card';
 import Text from './Text';
 import { colors, db, styles } from '../constants';
-import { capitalize } from '../utils';
+import { capitalize, colorize } from '../utils';
 
 export default HomeModal = ({ city, category }) => {
-	const { modalVisible, setModalVisible } = useContext(ModalContext);
+	const { homeModalVisible, setHomeModalVisible } = useContext(ModalContext);
 
 	return (
 		<Modal
 			animationType='fade'
 			hardwareAccelerated
-			onRequestClose={() => setModalVisible(false)}
+			onRequestClose={() => setHomeModalVisible(false)}
 			transparent
-			visible={modalVisible}>
+			visible={homeModalVisible}>
 			<View style={extraStyles.modal}>
 				<View style={extraStyles.modalDialog}>
 					<View style={[styles.shadow, extraStyles.modalContent]}>
@@ -27,7 +27,7 @@ export default HomeModal = ({ city, category }) => {
 								name='cancel'
 								size={24}
 								color={colors.white}
-								onPress={() => setModalVisible(false)}
+								onPress={() => setHomeModalVisible(false)}
 							/>
 							<Text
 								color='white'
@@ -51,12 +51,7 @@ export default HomeModal = ({ city, category }) => {
 									data={db[city][category]}
 									keyExtractor={item => item.name}
 									renderItem={({ item, index }) => (
-										<Card
-											color={
-												index % 2 === 0
-													? 'black'
-													: 'white'
-											}>
+										<Card color={colorize(index + 1)}>
 											<View
 												style={[
 													styles.row,
@@ -67,11 +62,7 @@ export default HomeModal = ({ city, category }) => {
 														extraStyles.modalBodyTextContainer
 													}>
 													<Text
-														color={
-															index % 2 === 0
-																? 'white'
-																: 'black'
-														}
+														color={colorize(index)}
 														style={
 															extraStyles.modalBodyTitleText
 														}>
@@ -104,11 +95,9 @@ export default HomeModal = ({ city, category }) => {
 																)
 															)}
 														<Text
-															color={
-																index % 2 === 0
-																	? 'white'
-																	: 'black'
-															}
+															color={colorize(
+																index
+															)}
 															style={
 																extraStyles.modalBodyText
 															}>
@@ -180,6 +169,7 @@ const extraStyles = StyleSheet.create({
 		paddingVertical: 10,
 	},
 	cardContainer: {
+		alignItems: 'center',
 		justifyContent: 'space-between',
 	},
 	modalBodyTextContainer: {

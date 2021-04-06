@@ -3,15 +3,16 @@ import React, { createContext, useCallback, useState } from 'react';
 export const ModalContext = createContext();
 
 export const ModalContextProvider = ({ children }) => {
-	const [modalVisible, setModalVisibleState] = useState(false);
+	const [homeModalVisible, setHomeModalVisibleState] = useState(false);
 
-	const setModalVisible = useCallback(
-		visible => setModalVisibleState(visible),
-		[modalVisible]
+	const setHomeModalVisible = useCallback(
+		visible => setHomeModalVisibleState(visible),
+		[homeModalVisible]
 	);
 
 	return (
-		<ModalContext.Provider value={{ modalVisible, setModalVisible }}>
+		<ModalContext.Provider
+			value={{ homeModalVisible, setHomeModalVisible }}>
 			{children}
 		</ModalContext.Provider>
 	);
