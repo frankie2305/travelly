@@ -5,7 +5,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { UserContext } from '../contexts';
 import { Card, Text, Touchable } from '../components';
 import { colors, styles } from '../constants';
-import { capitalize } from '../utils';
+import { capitalize, colorize } from '../utils';
 
 export default Travels = ({ navigation }) => {
 	const { travels } = useContext(UserContext);
@@ -39,20 +39,20 @@ export default Travels = ({ navigation }) => {
 								name: item.name,
 							})
 						}>
-						<Card color={index % 2 === 0 ? 'black' : 'white'}>
+						<Card color={colorize(index + 1)}>
 							<View style={{ flex: 1 }}>
 								<Text
-									color={index % 2 === 0 ? 'white' : 'black'}
+									color={colorize(index)}
 									style={{ fontFamily: 'roboto-bold' }}>
 									{item.name}
 								</Text>
 								<Text
-									color={index % 2 === 0 ? 'white' : 'black'}
+									color={colorize(index)}
 									style={{ fontSize: 14 }}>
 									Destination: {capitalize(item.city)}
 								</Text>
 								<Text
-									color={index % 2 === 0 ? 'white' : 'black'}
+									color={colorize(index)}
 									style={{ fontSize: 12 }}>
 									{item.restaurants.length} restaurant
 									{item.restaurants.length !== 1 && 's'},{' '}

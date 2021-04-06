@@ -5,6 +5,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { UserContext } from '../contexts';
 import { Button, Card, Text, Touchable } from '../components';
 import { colors, db, styles } from '../constants';
+import { colorize } from '../utils';
 
 export default TravelDetails = ({ navigation, route }) => {
 	const { name } = route.params;
@@ -25,7 +26,7 @@ export default TravelDetails = ({ navigation, route }) => {
 			db[city].activities.find(item => item.name === name)
 		);
 		const renderItem = (category, item, index) => (
-			<Card key={item.name} color={index % 2 == 0 ? 'black' : 'white'}>
+			<Card key={item.name} color={colorize(index + 1)}>
 				<View
 					style={[
 						styles.row,
@@ -36,7 +37,7 @@ export default TravelDetails = ({ navigation, route }) => {
 					]}>
 					<View style={{ flex: 1 }}>
 						<Text
-							color={index % 2 == 0 ? 'white' : 'black'}
+							color={colorize(index)}
 							style={{ fontFamily: 'roboto-bold' }}>
 							{item.name}
 						</Text>
@@ -57,7 +58,7 @@ export default TravelDetails = ({ navigation, route }) => {
 									/>
 								))}
 							<Text
-								color={index % 2 === 0 ? 'white' : 'black'}
+								color={colorize(index)}
 								style={{ fontSize: 14 }}>
 								{item.stars && ', '}
 								{item.summary}
@@ -81,9 +82,7 @@ export default TravelDetails = ({ navigation, route }) => {
 										}
 									/>
 									<Text
-										color={
-											index % 2 === 0 ? 'white' : 'black'
-										}
+										color={colorize(index)}
 										style={{ fontSize: 12 }}>
 										{' '}
 										{item.location}
@@ -105,9 +104,7 @@ export default TravelDetails = ({ navigation, route }) => {
 										}
 									/>
 									<Text
-										color={
-											index % 2 === 0 ? 'white' : 'black'
-										}
+										color={colorize(index)}
 										style={{ fontSize: 12 }}>
 										{' '}
 										{item.website}
@@ -131,9 +128,7 @@ export default TravelDetails = ({ navigation, route }) => {
 										}
 									/>
 									<Text
-										color={
-											index % 2 === 0 ? 'white' : 'black'
-										}
+										color={colorize(index)}
 										style={{ fontSize: 12 }}>
 										{' '}
 										{item.email}
@@ -157,9 +152,7 @@ export default TravelDetails = ({ navigation, route }) => {
 										}
 									/>
 									<Text
-										color={
-											index % 2 === 0 ? 'white' : 'black'
-										}
+										color={colorize(index)}
 										style={{ fontSize: 12 }}>
 										{' '}
 										{item.phone}
@@ -185,9 +178,7 @@ export default TravelDetails = ({ navigation, route }) => {
 										}
 									/>
 									<Text
-										color={
-											index % 2 === 0 ? 'white' : 'black'
-										}
+										color={colorize(index)}
 										style={{ fontSize: 12 }}>
 										{' '}
 										{item.operatedBy}
@@ -207,7 +198,7 @@ export default TravelDetails = ({ navigation, route }) => {
 									}
 								/>
 								<Text
-									color={index % 2 === 0 ? 'white' : 'black'}
+									color={colorize(index)}
 									style={{ fontSize: 12 }}>
 									{' '}
 									{item.duration}
@@ -226,7 +217,7 @@ export default TravelDetails = ({ navigation, route }) => {
 									}
 								/>
 								<Text
-									color={index % 2 === 0 ? 'white' : 'black'}
+									color={colorize(index)}
 									style={{ fontSize: 12 }}>
 									{' '}
 									from {item.price} per adult
