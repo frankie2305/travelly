@@ -3,7 +3,7 @@ import { View, FlatList, Linking } from 'react-native';
 import Constants from 'expo-constants';
 import { MaterialIcons } from '@expo/vector-icons';
 import { UserContext } from '../contexts';
-import { Card, Text, Touchable } from '../components';
+import { Button, Card, Text, Touchable } from '../components';
 import { colors, db, styles } from '../constants';
 
 export default TravelDetails = ({ route }) => {
@@ -25,155 +25,203 @@ export default TravelDetails = ({ route }) => {
 	);
 	const renderItem = ({ item, index }) => (
 		<Card color={index % 2 == 0 ? 'black' : 'white'}>
-			<Text
-				color={index % 2 == 0 ? 'white' : 'black'}
-				style={{ fontFamily: 'roboto-bold' }}>
-				{item.name}
-			</Text>
-			<View style={styles.row}>
-				{item.stars &&
-					[...Array(Number(item.stars))].map((value, i) => (
-						<MaterialIcons
-							key={i}
-							name='star'
-							size={14}
-							color={index % 2 === 0 ? colors.white : colors.gray}
-						/>
-					))}
-				<Text
-					color={index % 2 === 0 ? 'white' : 'black'}
-					style={{ fontSize: 14 }}>
-					{item.stars && ', '}
-					{item.summary}
-				</Text>
-			</View>
-			{item.location && (
-				<Touchable
-					onPress={() =>
-						Linking.openURL(
-							`https://www.google.com/maps/place/${item.location}`
-						)
-					}>
+			<View
+				style={[
+					styles.row,
+					{ alignItems: 'center', justifyContent: 'space-between' },
+				]}>
+				<View style={{ flex: 1 }}>
+					<Text
+						color={index % 2 == 0 ? 'white' : 'black'}
+						style={{ fontFamily: 'roboto-bold' }}>
+						{item.name}
+					</Text>
 					<View style={styles.row}>
-						<MaterialIcons
-							name='location-pin'
-							size={12}
-							color={index % 2 === 0 ? colors.white : colors.gray}
-						/>
+						{item.stars &&
+							[...Array(Number(item.stars))].map((value, i) => (
+								<MaterialIcons
+									key={i}
+									name='star'
+									size={14}
+									color={
+										index % 2 === 0
+											? colors.white
+											: colors.gray
+									}
+								/>
+							))}
+						<Text
+							color={index % 2 === 0 ? 'white' : 'black'}
+							style={{ fontSize: 14 }}>
+							{item.stars && ', '}
+							{item.summary}
+						</Text>
+					</View>
+					{item.location && (
+						<Touchable
+							onPress={() =>
+								Linking.openURL(
+									`https://www.google.com/maps/place/${item.location}`
+								)
+							}>
+							<View style={styles.row}>
+								<MaterialIcons
+									name='location-pin'
+									size={12}
+									color={
+										index % 2 === 0
+											? colors.white
+											: colors.gray
+									}
+								/>
 
-						<Text
-							color={index % 2 === 0 ? 'white' : 'black'}
-							style={{ fontSize: 12 }}>
-							{' '}
-							{item.location}
-						</Text>
-					</View>
-				</Touchable>
-			)}
-			{item.website && (
-				<Touchable onPress={() => Linking.openURL(item.website)}>
-					<View style={styles.row}>
-						<MaterialIcons
-							name='web'
-							size={12}
-							color={index % 2 === 0 ? colors.white : colors.gray}
-						/>
-						<Text
-							color={index % 2 === 0 ? 'white' : 'black'}
-							style={{ fontSize: 12 }}>
-							{' '}
-							{item.website}
-						</Text>
-					</View>
-				</Touchable>
-			)}
-			{item.email && (
-				<Touchable
-					onPress={() => Linking.openURL(`mailto:${item.email}`)}>
-					<View style={styles.row}>
-						<MaterialIcons
-							name='email'
-							size={12}
-							color={index % 2 === 0 ? colors.white : colors.gray}
-						/>
-						<Text
-							color={index % 2 === 0 ? 'white' : 'black'}
-							style={{ fontSize: 12 }}>
-							{' '}
-							{item.email}
-						</Text>
-					</View>
-				</Touchable>
-			)}
-			{item.phone && (
-				<Touchable onPress={() => Linking.openURL(`tel:${item.phone}`)}>
-					<View style={styles.row}>
-						<MaterialIcons
-							name='phone'
-							size={12}
-							color={index % 2 === 0 ? colors.white : colors.gray}
-						/>
-						<Text
-							color={index % 2 === 0 ? 'white' : 'black'}
-							style={{ fontSize: 12 }}>
-							{' '}
-							{item.phone}
-						</Text>
-					</View>
-				</Touchable>
-			)}
-			{item.operatedBy && (
-				<Touchable
-					onPress={() =>
-						Linking.openURL(
-							`https://www.google.com/search?q=${item.operatedBy}`
-						)
-					}>
-					<View style={styles.row}>
-						<MaterialIcons
-							name='person'
-							size={12}
-							color={index % 2 === 0 ? colors.white : colors.gray}
-						/>
-						<Text
-							color={index % 2 === 0 ? 'white' : 'black'}
-							style={{ fontSize: 12 }}>
-							{' '}
-							{item.operatedBy}
-						</Text>
-					</View>
-				</Touchable>
-			)}
-			{item.duration && (
-				<View style={styles.row}>
-					<MaterialIcons
-						name='access-time'
-						size={12}
-						color={index % 2 === 0 ? colors.white : colors.gray}
-					/>
-					<Text
-						color={index % 2 === 0 ? 'white' : 'black'}
-						style={{ fontSize: 12 }}>
-						{' '}
-						{item.duration}
-					</Text>
+								<Text
+									color={index % 2 === 0 ? 'white' : 'black'}
+									style={{ fontSize: 12 }}>
+									{' '}
+									{item.location}
+								</Text>
+							</View>
+						</Touchable>
+					)}
+					{item.website && (
+						<Touchable
+							onPress={() => Linking.openURL(item.website)}>
+							<View style={styles.row}>
+								<MaterialIcons
+									name='web'
+									size={12}
+									color={
+										index % 2 === 0
+											? colors.white
+											: colors.gray
+									}
+								/>
+								<Text
+									color={index % 2 === 0 ? 'white' : 'black'}
+									style={{ fontSize: 12 }}>
+									{' '}
+									{item.website}
+								</Text>
+							</View>
+						</Touchable>
+					)}
+					{item.email && (
+						<Touchable
+							onPress={() =>
+								Linking.openURL(`mailto:${item.email}`)
+							}>
+							<View style={styles.row}>
+								<MaterialIcons
+									name='email'
+									size={12}
+									color={
+										index % 2 === 0
+											? colors.white
+											: colors.gray
+									}
+								/>
+								<Text
+									color={index % 2 === 0 ? 'white' : 'black'}
+									style={{ fontSize: 12 }}>
+									{' '}
+									{item.email}
+								</Text>
+							</View>
+						</Touchable>
+					)}
+					{item.phone && (
+						<Touchable
+							onPress={() =>
+								Linking.openURL(`tel:${item.phone}`)
+							}>
+							<View style={styles.row}>
+								<MaterialIcons
+									name='phone'
+									size={12}
+									color={
+										index % 2 === 0
+											? colors.white
+											: colors.gray
+									}
+								/>
+								<Text
+									color={index % 2 === 0 ? 'white' : 'black'}
+									style={{ fontSize: 12 }}>
+									{' '}
+									{item.phone}
+								</Text>
+							</View>
+						</Touchable>
+					)}
+					{item.operatedBy && (
+						<Touchable
+							onPress={() =>
+								Linking.openURL(
+									`https://www.google.com/search?q=${item.operatedBy}`
+								)
+							}>
+							<View style={styles.row}>
+								<MaterialIcons
+									name='person'
+									size={12}
+									color={
+										index % 2 === 0
+											? colors.white
+											: colors.gray
+									}
+								/>
+								<Text
+									color={index % 2 === 0 ? 'white' : 'black'}
+									style={{ fontSize: 12 }}>
+									{' '}
+									{item.operatedBy}
+								</Text>
+							</View>
+						</Touchable>
+					)}
+					{item.duration && (
+						<View style={styles.row}>
+							<MaterialIcons
+								name='access-time'
+								size={12}
+								color={
+									index % 2 === 0 ? colors.white : colors.gray
+								}
+							/>
+							<Text
+								color={index % 2 === 0 ? 'white' : 'black'}
+								style={{ fontSize: 12 }}>
+								{' '}
+								{item.duration}
+							</Text>
+						</View>
+					)}
+					{item.price && (
+						<View style={styles.row}>
+							<MaterialIcons
+								name='attach-money'
+								size={12}
+								color={
+									index % 2 === 0 ? colors.white : colors.gray
+								}
+							/>
+							<Text
+								color={index % 2 === 0 ? 'white' : 'black'}
+								style={{ fontSize: 12 }}>
+								{' '}
+								from {item.price} per adult
+							</Text>
+						</View>
+					)}
 				</View>
-			)}
-			{item.price && (
-				<View style={styles.row}>
-					<MaterialIcons
-						name='attach-money'
-						size={12}
-						color={index % 2 === 0 ? colors.white : colors.gray}
-					/>
-					<Text
-						color={index % 2 === 0 ? 'white' : 'black'}
-						style={{ fontSize: 12 }}>
-						{' '}
-						from {item.price} per adult
-					</Text>
-				</View>
-			)}
+				<MaterialIcons
+					name='delete'
+					size={24}
+					color={colors.red}
+					onPress={() => console.log('deleted item')}
+				/>
+			</View>
 		</Card>
 	);
 
@@ -205,22 +253,28 @@ export default TravelDetails = ({ route }) => {
 							},
 						]}>
 						<Text
-							color='blue'
+							color='red'
 							style={[styles.label, { textTransform: 'none' }]}>
 							Restaurants
 						</Text>
 						<MaterialIcons
 							name='add'
 							size={30}
-							color={colors.blue}
+							color={colors.red}
 							onPress={() => console.log('added restaurants')}
 						/>
 					</View>
-					<FlatList
-						data={restaurants}
-						keyExtractor={travel => travel.name}
-						renderItem={renderItem}
-					/>
+					{restaurants.length === 0 ? (
+						<Text color='pink' style={{ textAlign: 'center' }}>
+							You don't have any restaurants for this travel yet.
+						</Text>
+					) : (
+						<FlatList
+							data={restaurants}
+							keyExtractor={travel => travel.name}
+							renderItem={renderItem}
+						/>
+					)}
 				</View>
 				<View style={{ flex: 1 }}>
 					<Text />
@@ -232,22 +286,28 @@ export default TravelDetails = ({ route }) => {
 							},
 						]}>
 						<Text
-							color='blue'
+							color='green'
 							style={[styles.label, { textTransform: 'none' }]}>
 							Hotels
 						</Text>
 						<MaterialIcons
 							name='add'
 							size={30}
-							color={colors.blue}
+							color={colors.green}
 							onPress={() => console.log('added hotels')}
 						/>
 					</View>
-					<FlatList
-						data={hotels}
-						keyExtractor={travel => travel.name}
-						renderItem={renderItem}
-					/>
+					{hotels.length === 0 ? (
+						<Text color='teal' style={{ textAlign: 'center' }}>
+							You don't have any hotels for this travel yet.
+						</Text>
+					) : (
+						<FlatList
+							data={hotels}
+							keyExtractor={travel => travel.name}
+							renderItem={renderItem}
+						/>
+					)}
 				</View>
 				<View style={{ flex: 1 }}>
 					<Text />
@@ -270,11 +330,17 @@ export default TravelDetails = ({ route }) => {
 							onPress={() => console.log('added attractions')}
 						/>
 					</View>
-					<FlatList
-						data={attractions}
-						keyExtractor={travel => travel.name}
-						renderItem={renderItem}
-					/>
+					{attractions.length === 0 ? (
+						<Text color='cyan' style={{ textAlign: 'center' }}>
+							You don't have any attractions for this travel yet.
+						</Text>
+					) : (
+						<FlatList
+							data={attractions}
+							keyExtractor={travel => travel.name}
+							renderItem={renderItem}
+						/>
+					)}
 				</View>
 				<View style={{ flex: 1 }}>
 					<Text />
@@ -286,23 +352,38 @@ export default TravelDetails = ({ route }) => {
 							},
 						]}>
 						<Text
-							color='blue'
+							color='yellow'
 							style={[styles.label, { textTransform: 'none' }]}>
 							Things to do
 						</Text>
 						<MaterialIcons
 							name='add'
 							size={30}
-							color={colors.blue}
+							color={colors.yellow}
 							onPress={() => console.log('added things to do')}
 						/>
 					</View>
-					<FlatList
-						data={activities}
-						keyExtractor={travel => travel.name}
-						renderItem={renderItem}
-					/>
+					{activities.length === 0 ? (
+						<Text color='orange' style={{ textAlign: 'center' }}>
+							You don't have any things to do for this travel yet.
+						</Text>
+					) : (
+						<FlatList
+							data={activities}
+							keyExtractor={travel => travel.name}
+							renderItem={renderItem}
+						/>
+					)}
 				</View>
+			</View>
+			<Text />
+			<View style={styles.center}>
+				<Button
+					color='red'
+					icon='delete'
+					title='Delete this travel'
+					onPress={() => console.log('deleted travel')}
+				/>
 			</View>
 		</View>
 	);
