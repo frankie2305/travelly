@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
 import { View, FlatList } from 'react-native';
 import Constants from 'expo-constants';
+import { MaterialIcons } from '@expo/vector-icons';
 import { UserContext } from '../contexts';
 import { Card, Text, Touchable } from '../components';
-import { styles } from '../constants';
+import { colors, styles } from '../constants';
 import { capitalize } from '../utils';
 
 export default Travels = ({ navigation }) => {
@@ -16,16 +17,18 @@ export default Travels = ({ navigation }) => {
 				marginVertical: Constants.statusBarHeight,
 				marginHorizontal: 10,
 			}}>
-			<Text
-				color='blue'
-				style={[
-					styles.title,
-					{
-						textAlign: 'center',
-					},
-				]}>
-				My Travels
-			</Text>
+			<View style={[styles.row, styles.center]}>
+				<Text color='blue' style={styles.title}>
+					My Travels
+				</Text>
+				<MaterialIcons
+					style={{ position: 'absolute', right: 0 }}
+					name='add'
+					size={36}
+					color={colors.blue}
+					onPress={() => console.log('added travel')}
+				/>
+			</View>
 			<FlatList
 				data={travels}
 				keyExtractor={item => item.name}
