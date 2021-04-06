@@ -13,7 +13,7 @@ export default Button = ({
 	titleColor = 'white',
 	onPress,
 }) => (
-	<Touchable onPress={onPress}>
+	<Touchable btn onPress={onPress}>
 		<View
 			style={[
 				styles.row,
