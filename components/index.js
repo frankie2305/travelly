@@ -1,6 +1,7 @@
 import Button from './Button';
 import Card from './Card';
 import Category from './Category';
+import CheckBox from './CheckBox';
 import Form from './Form';
 import Header from './Header';
 import HomeModal from './HomeModal';
@@ -13,6 +14,7 @@ export {
 	Button,
 	Card,
 	Category,
+	CheckBox,
 	Form,
 	Header,
 	HomeModal,
