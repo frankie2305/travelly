@@ -2,13 +2,14 @@ import React, { useContext } from 'react';
 import { View, ScrollView, Image, Linking, Alert } from 'react-native';
 import Constants from 'expo-constants';
 import { MaterialIcons } from '@expo/vector-icons';
-import { UserContext } from '../contexts';
-import { Button, Card, Text, Touchable } from '../components';
+import { ModalContext, UserContext } from '../contexts';
+import { AddItemModal, Button, Card, Text, Touchable } from '../components';
 import { colors, db, images, styles } from '../constants';
 import { colorize, renderStars, singularize } from '../utils';
 
 export default TravelDetails = ({ navigation, route }) => {
 	const { name } = route.params;
+	const { setAddItemModalVisible } = useContext(ModalContext);
 	const { travels, setTravels } = useContext(UserContext);
 	const travel = travels.find(travel => travel.name === name);
 	if (travel) {
@@ -135,100 +136,103 @@ export default TravelDetails = ({ navigation, route }) => {
 		);
 
 		return (
-			<ScrollView
-				style={{
-					flex: 1,
-					marginVertical: Constants.statusBarHeight,
-					marginHorizontal: 10,
-				}}>
-				<Text color='blue' style={[styles.title, { textAlign: 'center' }]}>
-					Travel details of {name}
-				</Text>
-				<Text color='blue' style={[styles.label, { textAlign: 'center' }]}>
-					Destination: {city}
-				</Text>
-				<Text />
-				<View style={styles.center}>
-					<Image source={images[city]} style={{ width: 300, height: 300 }} />
-				</View>
-				<Text />
-				<View style={[styles.row, { justifyContent: 'space-between' }]}>
-					<Text color='red' style={[styles.label, { textTransform: 'none' }]}>
-						Restaurants
+			<>
+				<AddItemModal />
+				<ScrollView
+					style={{
+						flex: 1,
+						marginVertical: Constants.statusBarHeight,
+						marginHorizontal: 10,
+					}}>
+					<Text color='blue' style={[styles.title, { textAlign: 'center' }]}>
+						Travel details of {name}
 					</Text>
-					<MaterialIcons name='add' size={30} color={colors.red} onPress={() => console.log('added restaurants')} />
-				</View>
-				{restaurants.length === 0 ? (
-					<Text color='pink' style={{ textAlign: 'center' }}>
-						You don't have any restaurants for this travel yet.
+					<Text color='blue' style={[styles.label, { textAlign: 'center' }]}>
+						Destination: {city}
 					</Text>
-				) : (
-					restaurants.map((item, index) => renderItem('restaurants', item, index))
-				)}
-				<Text />
-				<View style={[styles.row, { justifyContent: 'space-between' }]}>
-					<Text color='green' style={[styles.label, { textTransform: 'none' }]}>
-						Hotels
-					</Text>
-					<MaterialIcons name='add' size={30} color={colors.green} onPress={() => console.log('added hotels')} />
-				</View>
-				{hotels.length === 0 ? (
-					<Text color='teal' style={{ textAlign: 'center' }}>
-						You don't have any hotels for this travel yet.
-					</Text>
-				) : (
-					hotels.map((item, index) => renderItem('hotels', item, index))
-				)}
-				<Text />
-				<View style={[styles.row, { justifyContent: 'space-between' }]}>
-					<Text color='blue' style={[styles.label, { textTransform: 'none' }]}>
-						Attractions
-					</Text>
-					<MaterialIcons name='add' size={30} color={colors.blue} onPress={() => console.log('added attractions')} />
-				</View>
-				{attractions.length === 0 ? (
-					<Text color='cyan' style={{ textAlign: 'center' }}>
-						You don't have any attractions for this travel yet.
-					</Text>
-				) : (
-					attractions.map((item, index) => renderItem('attractions', item, index))
-				)}
-				<Text />
-				<View style={[styles.row, { justifyContent: 'space-between' }]}>
-					<Text color='yellow' style={[styles.label, { textTransform: 'none' }]}>
-						Things to do
-					</Text>
-					<MaterialIcons name='add' size={30} color={colors.yellow} onPress={() => console.log('added things to do')} />
-				</View>
-				{activities.length === 0 ? (
-					<Text color='orange' style={{ textAlign: 'center' }}>
-						You don't have any things to do for this travel yet.
-					</Text>
-				) : (
-					activities.map((item, index) => renderItem('activities', item, index))
-				)}
-				<Text />
-				<View style={styles.center}>
-					<Button
-						color='red'
-						icon='delete'
-						title='Delete this travel'
-						onPress={() =>
-							Alert.alert('Deleting travel', `Are you sure you want to delete ${name}? This cannot be undone.`, [
-								{ text: 'Cancel', style: 'cancel' },
-								{
-									text: 'OK',
-									style: 'destructive',
-									onPress: () => {
-										setTravels(travels.filter(item => item.name !== name));
-										navigation.navigate('Travels');
+					<Text />
+					<View style={styles.center}>
+						<Image source={images[city]} style={{ width: 300, height: 300 }} />
+					</View>
+					<Text />
+					<View style={[styles.row, { justifyContent: 'space-between' }]}>
+						<Text color='red' style={[styles.label, { textTransform: 'none' }]}>
+							Restaurants
+						</Text>
+						<MaterialIcons name='add' size={30} color={colors.red} onPress={() => setAddItemModalVisible(true)} />
+					</View>
+					{restaurants.length === 0 ? (
+						<Text color='pink' style={{ textAlign: 'center' }}>
+							You don't have any restaurants for this travel yet.
+						</Text>
+					) : (
+						restaurants.map((item, index) => renderItem('restaurants', item, index))
+					)}
+					<Text />
+					<View style={[styles.row, { justifyContent: 'space-between' }]}>
+						<Text color='green' style={[styles.label, { textTransform: 'none' }]}>
+							Hotels
+						</Text>
+						<MaterialIcons name='add' size={30} color={colors.green} onPress={() => setAddItemModalVisible(true)} />
+					</View>
+					{hotels.length === 0 ? (
+						<Text color='teal' style={{ textAlign: 'center' }}>
+							You don't have any hotels for this travel yet.
+						</Text>
+					) : (
+						hotels.map((item, index) => renderItem('hotels', item, index))
+					)}
+					<Text />
+					<View style={[styles.row, { justifyContent: 'space-between' }]}>
+						<Text color='blue' style={[styles.label, { textTransform: 'none' }]}>
+							Attractions
+						</Text>
+						<MaterialIcons name='add' size={30} color={colors.blue} onPress={() => setAddItemModalVisible(true)} />
+					</View>
+					{attractions.length === 0 ? (
+						<Text color='cyan' style={{ textAlign: 'center' }}>
+							You don't have any attractions for this travel yet.
+						</Text>
+					) : (
+						attractions.map((item, index) => renderItem('attractions', item, index))
+					)}
+					<Text />
+					<View style={[styles.row, { justifyContent: 'space-between' }]}>
+						<Text color='yellow' style={[styles.label, { textTransform: 'none' }]}>
+							Things to do
+						</Text>
+						<MaterialIcons name='add' size={30} color={colors.yellow} onPress={() => setAddItemModalVisible(true)} />
+					</View>
+					{activities.length === 0 ? (
+						<Text color='orange' style={{ textAlign: 'center' }}>
+							You don't have any things to do for this travel yet.
+						</Text>
+					) : (
+						activities.map((item, index) => renderItem('activities', item, index))
+					)}
+					<Text />
+					<View style={styles.center}>
+						<Button
+							color='red'
+							icon='delete'
+							title='Delete this travel'
+							onPress={() =>
+								Alert.alert('Deleting travel', `Are you sure you want to delete ${name}? This cannot be undone.`, [
+									{ text: 'Cancel', style: 'cancel' },
+									{
+										text: 'OK',
+										style: 'destructive',
+										onPress: () => {
+											setTravels(travels.filter(item => item.name !== name));
+											navigation.navigate('Travels');
+										},
 									},
-								},
-							])
-						}
-					/>
-				</View>
-			</ScrollView>
+								])
+							}
+						/>
+					</View>
+				</ScrollView>
+			</>
 		);
 	}
 
