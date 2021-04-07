@@ -6,7 +6,7 @@ import Touchable from './Touchable';
 import { colors, styles } from '../constants';
 
 export default Category = ({ color, icon, label, onPress }) => (
-	<Touchable style={styles.center} onPress={onPress}>
+	<Touchable btn style={styles.center} onPress={onPress}>
 		<View>
 			<View style={[styles.shadow, extraStyles.container]}>
 				<View
