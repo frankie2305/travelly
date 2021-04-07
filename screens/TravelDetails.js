@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { View, ScrollView, Image, Linking, Alert } from 'react-native';
 import Constants from 'expo-constants';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -11,6 +11,7 @@ export default TravelDetails = ({ navigation, route }) => {
 	const { name } = route.params;
 	const { setAddItemModalVisible } = useContext(ModalContext);
 	const { travels, setTravels } = useContext(UserContext);
+	const [category, setCategory] = useState('');
 	const travel = travels.find(travel => travel.name === name);
 	if (travel) {
 		const city = travel.city;
@@ -137,7 +138,7 @@ export default TravelDetails = ({ navigation, route }) => {
 
 		return (
 			<>
-				<AddItemModal />
+				<AddItemModal travel={travel} category={category} />
 				<ScrollView
 					style={{
 						flex: 1,
@@ -159,7 +160,15 @@ export default TravelDetails = ({ navigation, route }) => {
 						<Text color='red' style={[styles.label, { textTransform: 'none' }]}>
 							Restaurants
 						</Text>
-						<MaterialIcons name='add' size={30} color={colors.red} onPress={() => setAddItemModalVisible(true)} />
+						<MaterialIcons
+							name='add'
+							size={30}
+							color={colors.red}
+							onPress={() => {
+								setCategory('restaurants');
+								setAddItemModalVisible(true);
+							}}
+						/>
 					</View>
 					{restaurants.length === 0 ? (
 						<Text color='pink' style={{ textAlign: 'center' }}>
@@ -173,7 +182,15 @@ export default TravelDetails = ({ navigation, route }) => {
 						<Text color='green' style={[styles.label, { textTransform: 'none' }]}>
 							Hotels
 						</Text>
-						<MaterialIcons name='add' size={30} color={colors.green} onPress={() => setAddItemModalVisible(true)} />
+						<MaterialIcons
+							name='add'
+							size={30}
+							color={colors.green}
+							onPress={() => {
+								setCategory('hotels');
+								setAddItemModalVisible(true);
+							}}
+						/>
 					</View>
 					{hotels.length === 0 ? (
 						<Text color='teal' style={{ textAlign: 'center' }}>
@@ -187,7 +204,15 @@ export default TravelDetails = ({ navigation, route }) => {
 						<Text color='blue' style={[styles.label, { textTransform: 'none' }]}>
 							Attractions
 						</Text>
-						<MaterialIcons name='add' size={30} color={colors.blue} onPress={() => setAddItemModalVisible(true)} />
+						<MaterialIcons
+							name='add'
+							size={30}
+							color={colors.blue}
+							onPress={() => {
+								setCategory('attractions');
+								setAddItemModalVisible(true);
+							}}
+						/>
 					</View>
 					{attractions.length === 0 ? (
 						<Text color='cyan' style={{ textAlign: 'center' }}>
@@ -201,7 +226,15 @@ export default TravelDetails = ({ navigation, route }) => {
 						<Text color='yellow' style={[styles.label, { textTransform: 'none' }]}>
 							Things to do
 						</Text>
-						<MaterialIcons name='add' size={30} color={colors.yellow} onPress={() => setAddItemModalVisible(true)} />
+						<MaterialIcons
+							name='add'
+							size={30}
+							color={colors.yellow}
+							onPress={() => {
+								setCategory('activities');
+								setAddItemModalVisible(true);
+							}}
+						/>
 					</View>
 					{activities.length === 0 ? (
 						<Text color='orange' style={{ textAlign: 'center' }}>
