@@ -5,7 +5,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { UserContext } from '../contexts';
 import { Button, Card, Text, Touchable } from '../components';
 import { colors, db, styles } from '../constants';
-import { colorize, singularize } from '../utils';
+import { colorize, renderStars, singularize } from '../utils';
 
 export default TravelDetails = ({ navigation, route }) => {
 	const { name } = route.params;
@@ -25,7 +25,7 @@ export default TravelDetails = ({ navigation, route }) => {
 							{item.name}
 						</Text>
 						<View style={styles.row}>
-							{item.stars && [...Array(Number(item.stars))].map((value, i) => <MaterialIcons key={i} name='star' size={14} color={index % 2 === 0 ? colors.white : colors.gray} />)}
+							{item.stars && renderStars(item.stars, 14, colorize(index))}
 							<Text color={colorize(index)} style={{ fontSize: 14 }}>
 								{item.stars && ', '}
 								{item.summary}

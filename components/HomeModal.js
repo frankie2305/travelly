@@ -7,7 +7,7 @@ import Card from './Card';
 import CheckBox from './CheckBox';
 import Text from './Text';
 import { colors, db, styles } from '../constants';
-import { capitalize, colorize, singularize } from '../utils';
+import { capitalize, colorize, renderStars, singularize } from '../utils';
 
 export default HomeModal = ({ city, category }) => {
 	const { homeModalVisible, setHomeModalVisible } = useContext(ModalContext);
@@ -68,12 +68,11 @@ export default HomeModal = ({ city, category }) => {
 																{item.name}
 															</Text>
 															<Text color={colorize(index)} style={styles.modalBodyText}>
-																{item[category].length}{' '}
-																{category === 'activities' ? `thing${item[category].length !== 1 && 's'} to do` : item[category].length !== 1 ? category : category.substring(0, category.length - 1)}
+																{item[category].length} {item[category].length === 1 ? singularize(category) : category === 'activities' ? 'things to do' : category}
 															</Text>
 															{item[category].includes(name) && (
 																<Text color='red' style={styles.modalBodyText}>
-																	{item.name} already has the {category === 'activities' ? 'thing to do' : category.substring(0, category.length - 1)}.
+																	{item.name} already has the {singularize(category)}.
 																</Text>
 															)}
 														</View>
@@ -131,12 +130,12 @@ export default HomeModal = ({ city, category }) => {
 											renderItem={({ item, index }) => (
 												<Card color={colorize(index + 1)}>
 													<View style={[styles.row, styles.modalCardContainer]}>
-														<View style={styles.modalBodyTextContainer}>
+														<View style={{ flex: 1 }}>
 															<Text color={colorize(index)} style={styles.modalBodyTitleText}>
 																{item.name}
 															</Text>
 															<View style={styles.row}>
-																{item.stars && [...Array(Number(item.stars))].map((value, i) => <MaterialIcons key={i} name='star' size={12} color={index % 2 === 0 ? colors.white : colors.gray} />)}
+																{item.stars && renderStars(item.stars, 12, colorize(index))}
 																<Text color={colorize(index)} style={styles.modalBodyText}>
 																	{item.stars && ', '}
 																	{item.summary}
