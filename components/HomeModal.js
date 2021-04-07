@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { StyleSheet, View, Modal, FlatList, Alert } from 'react-native';
-import Constants from 'expo-constants';
+import { View, Modal, FlatList, Alert } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { ModalContext, UserContext } from '../contexts';
 import Button from './Button';
@@ -19,16 +18,16 @@ export default HomeModal = ({ city, category }) => {
 
 	return (
 		<Modal animationType='fade' hardwareAccelerated onRequestClose={() => setHomeModalVisible(false)} transparent visible={homeModalVisible}>
-			<View style={extraStyles.modal}>
-				<View style={extraStyles.modalDialog}>
-					<View style={[styles.shadow, extraStyles.modalContent]}>
+			<View style={styles.modal}>
+				<View style={styles.modalDialog}>
+					<View style={[styles.shadow, styles.modalContent]}>
 						{city &&
 							category &&
 							(add ? (
 								<>
-									<View style={extraStyles.modalHeader}>
+									<View style={styles.modalHeader}>
 										<MaterialIcons
-											style={extraStyles.modalClose}
+											style={styles.modalClose}
 											name='arrow-back'
 											size={24}
 											color={colors.white}
@@ -50,12 +49,12 @@ export default HomeModal = ({ city, category }) => {
 													  }
 											}
 										/>
-										<Text color='white' style={extraStyles.modalHeaderText}>
+										<Text color='white' style={styles.modalHeaderText}>
 											Choose which travel(s) you want to add the {singularize(category)} to or press the back button to go back
 										</Text>
 									</View>
-									<View style={extraStyles.modalBody}>
-										<Text color='blue' style={extraStyles.modalHeaderText}>
+									<View style={styles.modalBody}>
+										<Text color='blue' style={styles.modalHeaderText}>
 											Your existing travels to {capitalize(city)}
 										</Text>
 										<FlatList
@@ -63,17 +62,17 @@ export default HomeModal = ({ city, category }) => {
 											keyExtractor={item => item.name}
 											renderItem={({ item, index }) => (
 												<Card color={colorize(index + 1)}>
-													<View style={[styles.row, extraStyles.modalCardContainer]}>
-														<View style={extraStyles.modalBodyTextContainer}>
-															<Text color={colorize(index)} style={extraStyles.modalBodyTitleText}>
+													<View style={[styles.row, styles.modalCardContainer]}>
+														<View style={{ flex: 1 }}>
+															<Text color={colorize(index)} style={styles.modalBodyTitleText}>
 																{item.name}
 															</Text>
-															<Text color={colorize(index)} style={extraStyles.modalBodyText}>
+															<Text color={colorize(index)} style={styles.modalBodyText}>
 																{item[category].length}{' '}
 																{category === 'activities' ? `thing${item[category].length !== 1 && 's'} to do` : item[category].length !== 1 ? category : category.substring(0, category.length - 1)}
 															</Text>
 															{item[category].includes(name) && (
-																<Text color='red' style={extraStyles.modalBodyText}>
+																<Text color='red' style={styles.modalBodyText}>
 																	{item.name} already has the {category === 'activities' ? 'thing to do' : category.substring(0, category.length - 1)}.
 																</Text>
 															)}
@@ -91,9 +90,9 @@ export default HomeModal = ({ city, category }) => {
 										{chosen.length > 0 && (
 											<View style={styles.center}>
 												<Button
-													title='save'
 													color='green'
 													icon='save'
+													title='save'
 													onPress={() =>
 														Alert.alert('Saving changes', 'Are you sure you want to save all the changes?', [
 															{ text: 'Cancel', style: 'cancel' },
@@ -101,7 +100,7 @@ export default HomeModal = ({ city, category }) => {
 																text: 'OK',
 																style: 'default',
 																onPress: () => {
-																	setTravels(travels.map(item => (chosen.includes(item.name) ? { ...item, [category]: [...item[category], name] } : item)));
+																	setTravels(travels.map(item => (chosen.includes(item.name) ? { ...item, [category]: [name, ...item[category]] } : item)));
 																	setChosen([]);
 																	setAdd(false);
 																	setHomeModalVisible(false);
@@ -116,14 +115,14 @@ export default HomeModal = ({ city, category }) => {
 								</>
 							) : (
 								<>
-									<View style={extraStyles.modalHeader}>
-										<MaterialIcons style={extraStyles.modalClose} name='cancel' size={24} color={colors.white} onPress={() => setHomeModalVisible(false)} />
-										<Text color='white' style={extraStyles.modalHeaderText}>
+									<View style={styles.modalHeader}>
+										<MaterialIcons style={styles.modalClose} name='cancel' size={24} color={colors.white} onPress={() => setHomeModalVisible(false)} />
+										<Text color='white' style={styles.modalHeaderText}>
 											Press + at the end of each {singularize(category)} to add it to your travel(s) or press the close button to cancel
 										</Text>
 									</View>
-									<View style={extraStyles.modalBody}>
-										<Text color='blue' style={extraStyles.modalHeaderText}>
+									<View style={styles.modalBody}>
+										<Text color='blue' style={styles.modalHeaderText}>
 											{category === 'activities' ? 'Things to do' : capitalize(category)} in {capitalize(city)}
 										</Text>
 										<FlatList
@@ -131,14 +130,14 @@ export default HomeModal = ({ city, category }) => {
 											keyExtractor={item => item.name}
 											renderItem={({ item, index }) => (
 												<Card color={colorize(index + 1)}>
-													<View style={[styles.row, extraStyles.modalCardContainer]}>
-														<View style={extraStyles.modalBodyTextContainer}>
-															<Text color={colorize(index)} style={extraStyles.modalBodyTitleText}>
+													<View style={[styles.row, styles.modalCardContainer]}>
+														<View style={styles.modalBodyTextContainer}>
+															<Text color={colorize(index)} style={styles.modalBodyTitleText}>
 																{item.name}
 															</Text>
 															<View style={styles.row}>
 																{item.stars && [...Array(Number(item.stars))].map((value, i) => <MaterialIcons key={i} name='star' size={12} color={index % 2 === 0 ? colors.white : colors.gray} />)}
-																<Text color={colorize(index)} style={extraStyles.modalBodyText}>
+																<Text color={colorize(index)} style={styles.modalBodyText}>
 																	{item.stars && ', '}
 																	{item.summary}
 																</Text>
@@ -166,55 +165,3 @@ export default HomeModal = ({ city, category }) => {
 		</Modal>
 	);
 };
-
-const extraStyles = StyleSheet.create({
-	modal: {
-		flex: 1,
-		backgroundColor: 'rgba(0, 0, 0, 0.5)',
-	},
-	modalDialog: {
-		flex: 1,
-		margin: Constants.statusBarHeight,
-		marginTop: Constants.statusBarHeight * 3,
-	},
-	modalContent: {
-		flex: 1,
-		backgroundColor: colors.white,
-		borderColor: 'transparent',
-		borderRadius: 10,
-	},
-	modalClose: {
-		alignSelf: 'center',
-		marginBottom: 10,
-	},
-	modalHeader: {
-		backgroundColor: colors.blue,
-		borderTopLeftRadius: 10,
-		borderTopRightRadius: 10,
-		paddingHorizontal: 5,
-		paddingVertical: 10,
-	},
-	modalHeaderText: {
-		fontFamily: 'roboto-black',
-		fontSize: 20,
-		textAlign: 'center',
-	},
-	modalBody: {
-		flex: 1,
-		paddingHorizontal: 5,
-		paddingVertical: 10,
-	},
-	modalCardContainer: {
-		alignItems: 'center',
-		justifyContent: 'space-between',
-	},
-	modalBodyTextContainer: {
-		flex: 1,
-	},
-	modalBodyTitleText: {
-		fontFamily: 'roboto-bold',
-	},
-	modalBodyText: {
-		fontSize: 12,
-	},
-});

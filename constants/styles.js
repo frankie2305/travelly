@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import Constants from 'expo-constants';
 import colors from './colors';
 
 export default styles = StyleSheet.create({
@@ -23,6 +24,52 @@ export default styles = StyleSheet.create({
 		fontFamily: 'roboto-bold',
 		fontSize: 24,
 		textTransform: 'uppercase',
+	},
+	modal: {
+		flex: 1,
+		backgroundColor: colors.blurred,
+	},
+	modalBody: {
+		flex: 1,
+		paddingHorizontal: 5,
+		paddingVertical: 10,
+	},
+	modalBodyText: {
+		fontSize: 12,
+	},
+	modalBodyTitleText: {
+		fontFamily: 'roboto-bold',
+	},
+	modalCardContainer: {
+		alignItems: 'center',
+		justifyContent: 'space-between',
+	},
+	modalClose: {
+		alignSelf: 'center',
+		marginBottom: 10,
+	},
+	modalContent: {
+		flex: 1,
+		backgroundColor: colors.white,
+		borderColor: 'transparent',
+		borderRadius: 10,
+	},
+	modalDialog: {
+		flex: 1,
+		margin: Constants.statusBarHeight,
+		marginTop: Constants.statusBarHeight * 3,
+	},
+	modalHeader: {
+		backgroundColor: colors.blue,
+		borderTopLeftRadius: 10,
+		borderTopRightRadius: 10,
+		paddingHorizontal: 5,
+		paddingVertical: 10,
+	},
+	modalHeaderText: {
+		fontFamily: 'roboto-black',
+		fontSize: 20,
+		textAlign: 'center',
 	},
 	row: {
 		flexDirection: 'row',

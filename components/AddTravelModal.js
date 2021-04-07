@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react';
-import { StyleSheet, View, Modal, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
+import { View, Modal, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
 import * as yup from 'yup';
-import Constants from 'expo-constants';
 import { useActionSheet } from '@expo/react-native-action-sheet';
 import { MaterialIcons } from '@expo/vector-icons';
 import { ModalContext, UserContext } from '../contexts';
@@ -28,12 +27,12 @@ export default AddTravelModal = () => {
 
 	return (
 		<Modal animationType='fade' hardwareAccelerated onRequestClose={() => setAddTravelModalVisible(false)} transparent visible={addTravelModalVisible}>
-			<View style={extraStyles.modal}>
-				<View style={extraStyles.modalDialog}>
-					<View style={[styles.shadow, extraStyles.modalContent]}>
-						<View style={extraStyles.modalHeader}>
+			<View style={styles.modal}>
+				<View style={styles.modalDialog}>
+					<View style={[styles.shadow, styles.modalContent, { flex: 0 }]}>
+						<View style={styles.modalHeader}>
 							<MaterialIcons
-								style={extraStyles.modalClose}
+								style={styles.modalClose}
 								name='cancel'
 								size={24}
 								color={colors.white}
@@ -42,12 +41,12 @@ export default AddTravelModal = () => {
 									setAddTravelModalVisible(false);
 								}}
 							/>
-							<Text color='white' style={extraStyles.modalHeaderText}>
+							<Text color='white' style={styles.modalHeaderText}>
 								New Travel Form
 							</Text>
 						</View>
 						<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-							<View style={extraStyles.modalBody}>
+							<View style={[styles.modalBody, { flex: 0 }]}>
 								<View style={styles.center}>
 									<Form
 										initialValues={{ name: '' }}
@@ -115,40 +114,3 @@ export default AddTravelModal = () => {
 		</Modal>
 	);
 };
-
-const extraStyles = StyleSheet.create({
-	modal: {
-		flex: 1,
-		backgroundColor: 'rgba(0, 0, 0, 0.5)',
-	},
-	modalDialog: {
-		flex: 1,
-		margin: Constants.statusBarHeight,
-		marginTop: Constants.statusBarHeight * 3,
-	},
-	modalContent: {
-		backgroundColor: colors.white,
-		borderColor: 'transparent',
-		borderRadius: 10,
-	},
-	modalClose: {
-		alignSelf: 'center',
-		marginBottom: 10,
-	},
-	modalHeader: {
-		backgroundColor: colors.blue,
-		borderTopLeftRadius: 10,
-		borderTopRightRadius: 10,
-		paddingHorizontal: 5,
-		paddingVertical: 10,
-	},
-	modalHeaderText: {
-		fontFamily: 'roboto-black',
-		fontSize: 20,
-		textAlign: 'center',
-	},
-	modalBody: {
-		paddingHorizontal: 5,
-		paddingVertical: 10,
-	},
-});
