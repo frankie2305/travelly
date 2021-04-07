@@ -1,4 +1,5 @@
 import capitalize from './capitalize';
 import colorize from './colorize';
+import singularize from './singularize';
 
-export { capitalize, colorize };
+export { capitalize, colorize, singularize };
