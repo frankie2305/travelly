@@ -8,7 +8,7 @@ import Card from './Card';
 import CheckBox from './CheckBox';
 import Text from './Text';
 import { colors, db, styles } from '../constants';
-import { capitalize, colorize } from '../utils';
+import { capitalize, colorize, singularize } from '../utils';
 
 export default HomeModal = ({ city, category }) => {
 	const { homeModalVisible, setHomeModalVisible } = useContext(ModalContext);
@@ -22,29 +22,42 @@ export default HomeModal = ({ city, category }) => {
 			<View style={extraStyles.modal}>
 				<View style={extraStyles.modalDialog}>
 					<View style={[styles.shadow, extraStyles.modalContent]}>
-						{add ? (
-							<>
-								<View style={extraStyles.modalHeader}>
-									<MaterialIcons
-										style={extraStyles.modalClose}
-										name='arrow-back'
-										size={24}
-										color={colors.white}
-										onPress={() => {
-											setChosen([]);
-											setAdd(false);
-										}}
-									/>
-									<Text color='white' style={extraStyles.modalHeaderText}>
-										Choose which travel(s) you want to add the {category === 'activities' ? 'thing to do' : category.substring(0, category.length - 1)} to or press the back button to go back
-									</Text>
-								</View>
-								<View style={extraStyles.modalBody}>
-									<Text color='blue' style={extraStyles.modalHeaderText}>
-										Your existing travels to {city && capitalize(city)}
-									</Text>
-									<View style={extraStyles.list}></View>
-									{city && category && (
+						{city &&
+							category &&
+							(add ? (
+								<>
+									<View style={extraStyles.modalHeader}>
+										<MaterialIcons
+											style={extraStyles.modalClose}
+											name='arrow-back'
+											size={24}
+											color={colors.white}
+											onPress={
+												chosen.length === 0
+													? () => setAdd(false)
+													: () => {
+															Alert.alert('Going back', 'Are you sure you want to go back? You will lose all the changes.', [
+																{ text: 'Cancel', style: 'cancel' },
+																{
+																	text: 'OK',
+																	style: 'destructive',
+																	onPress: () => {
+																		setChosen([]);
+																		setAdd(false);
+																	},
+																},
+															]);
+													  }
+											}
+										/>
+										<Text color='white' style={extraStyles.modalHeaderText}>
+											Choose which travel(s) you want to add the {singularize(category)} to or press the back button to go back
+										</Text>
+									</View>
+									<View style={extraStyles.modalBody}>
+										<Text color='blue' style={extraStyles.modalHeaderText}>
+											Your existing travels to {capitalize(city)}
+										</Text>
 										<FlatList
 											data={travels.filter(item => item.city === city)}
 											keyExtractor={item => item.name}
@@ -75,46 +88,44 @@ export default HomeModal = ({ city, category }) => {
 												</Card>
 											)}
 										/>
-									)}
-									{chosen.length > 0 && (
-										<View style={styles.center}>
-											<Button
-												title='save'
-												color='green'
-												icon='save'
-												onPress={() =>
-													Alert.alert('Saving changes', 'Are you sure you want to save all the changes?', [
-														{ text: 'Cancel', style: 'cancel' },
-														{
-															text: 'OK',
-															style: 'default',
-															onPress: () => {
-																setTravels(travels.map(item => (chosen.includes(item.name) ? { ...item, [category]: [...item[category], name] } : item)));
-																setChosen([]);
-																setAdd(false);
-																setHomeModalVisible(false);
+										{chosen.length > 0 && (
+											<View style={styles.center}>
+												<Button
+													title='save'
+													color='green'
+													icon='save'
+													onPress={() =>
+														Alert.alert('Saving changes', 'Are you sure you want to save all the changes?', [
+															{ text: 'Cancel', style: 'cancel' },
+															{
+																text: 'OK',
+																style: 'default',
+																onPress: () => {
+																	setTravels(travels.map(item => (chosen.includes(item.name) ? { ...item, [category]: [...item[category], name] } : item)));
+																	setChosen([]);
+																	setAdd(false);
+																	setHomeModalVisible(false);
+																},
 															},
-														},
-													])
-												}
-											/>
-										</View>
-									)}
-								</View>
-							</>
-						) : (
-							<>
-								<View style={extraStyles.modalHeader}>
-									<MaterialIcons style={extraStyles.modalClose} name='cancel' size={24} color={colors.white} onPress={() => setHomeModalVisible(false)} />
-									<Text color='white' style={extraStyles.modalHeaderText}>
-										Press + at the end of each {category === 'activities' ? 'thing to do' : category.substring(0, category.length - 1)} to add it to your travel(s) or press the close button to cancel
-									</Text>
-								</View>
-								<View style={extraStyles.modalBody}>
-									<Text color='blue' style={extraStyles.modalHeaderText}>
-										{category && (category === 'activities' ? 'Things to do' : capitalize(category))} in {city && capitalize(city)}
-									</Text>
-									{city && category && (
+														])
+													}
+												/>
+											</View>
+										)}
+									</View>
+								</>
+							) : (
+								<>
+									<View style={extraStyles.modalHeader}>
+										<MaterialIcons style={extraStyles.modalClose} name='cancel' size={24} color={colors.white} onPress={() => setHomeModalVisible(false)} />
+										<Text color='white' style={extraStyles.modalHeaderText}>
+											Press + at the end of each {singularize(category)} to add it to your travel(s) or press the close button to cancel
+										</Text>
+									</View>
+									<View style={extraStyles.modalBody}>
+										<Text color='blue' style={extraStyles.modalHeaderText}>
+											{category === 'activities' ? 'Things to do' : capitalize(category)} in {capitalize(city)}
+										</Text>
 										<FlatList
 											data={db[city][category]}
 											keyExtractor={item => item.name}
@@ -146,10 +157,9 @@ export default HomeModal = ({ city, category }) => {
 												</Card>
 											)}
 										/>
-									)}
-								</View>
-							</>
-						)}
+									</View>
+								</>
+							))}
 					</View>
 				</View>
 			</View>
