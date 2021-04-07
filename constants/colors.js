@@ -12,4 +12,5 @@ export default colors = {
 	black: '#343a40',
 	gray: '#6c757d',
 	white: '#f8f9fa',
+	blurred: 'rgba(0, 0, 0, 0.5)',
 };
