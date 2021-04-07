@@ -1,3 +1,4 @@
+import AddTravelModal from './AddTravelModal';
 import Button from './Button';
 import Card from './Card';
 import Category from './Category';
@@ -11,6 +12,7 @@ import TextInput from './TextInput';
 import Touchable from './Touchable';
 
 export {
+	AddTravelModal,
 	Button,
 	Card,
 	Category,
