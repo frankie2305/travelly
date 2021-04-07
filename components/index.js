@@ -1,3 +1,4 @@
+import AddItemModal from './AddItemModal';
 import AddTravelModal from './AddTravelModal';
 import Button from './Button';
 import Card from './Card';
@@ -12,6 +13,7 @@ import TextInput from './TextInput';
 import Touchable from './Touchable';
 
 export {
+	AddItemModal,
 	AddTravelModal,
 	Button,
 	Card,
