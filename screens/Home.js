@@ -41,6 +41,7 @@ export default Home = ({ navigation }) => {
 					resizeMode='cover'
 					style={[styles.center, { flex: 1 }]}>
 					<Touchable
+						btn
 						onPress={() =>
 							showActionSheetWithOptions(
 								{
