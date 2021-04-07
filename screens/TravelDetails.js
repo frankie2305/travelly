@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { View, ScrollView, Linking, Alert } from 'react-native';
+import { View, ScrollView, Image, Linking, Alert } from 'react-native';
 import Constants from 'expo-constants';
 import { MaterialIcons } from '@expo/vector-icons';
 import { UserContext } from '../contexts';
@@ -8,6 +8,12 @@ import { colors, db, styles } from '../constants';
 import { colorize, renderStars, singularize } from '../utils';
 
 export default TravelDetails = ({ navigation, route }) => {
+	const cityImages = {
+		// By Benh LIEU SONG (Flickr) - Sydney&#039;s Landmarks 2, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=82284289
+		sydney: require('../assets/sydney.jpg'),
+		// By Montage by HappyWaldo - Own work by uploader created from licence-free images from Commons., CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=78098825
+		melbourne: require('../assets/melbourne.jpg'),
+	};
 	const { name } = route.params;
 	const { travels, setTravels } = useContext(UserContext);
 	const travel = travels.find(travel => travel.name === name);
@@ -144,14 +150,15 @@ export default TravelDetails = ({ navigation, route }) => {
 				<Text color='blue' style={[styles.title, { textAlign: 'center' }]}>
 					Travel details of {name}
 				</Text>
+				<Text color='blue' style={[styles.label, { textAlign: 'center' }]}>
+					Destination: {city}
+				</Text>
 				<Text />
-				<View
-					style={[
-						styles.row,
-						{
-							justifyContent: 'space-between',
-						},
-					]}>
+				<View style={styles.center}>
+					<Image source={cityImages[city]} style={{ width: 300, height: 300 }} />
+				</View>
+				<Text />
+				<View style={[styles.row, { justifyContent: 'space-between' }]}>
 					<Text color='red' style={[styles.label, { textTransform: 'none' }]}>
 						Restaurants
 					</Text>
@@ -165,13 +172,7 @@ export default TravelDetails = ({ navigation, route }) => {
 					restaurants.map((item, index) => renderItem('restaurants', item, index))
 				)}
 				<Text />
-				<View
-					style={[
-						styles.row,
-						{
-							justifyContent: 'space-between',
-						},
-					]}>
+				<View style={[styles.row, { justifyContent: 'space-between' }]}>
 					<Text color='green' style={[styles.label, { textTransform: 'none' }]}>
 						Hotels
 					</Text>
@@ -185,13 +186,7 @@ export default TravelDetails = ({ navigation, route }) => {
 					hotels.map((item, index) => renderItem('hotels', item, index))
 				)}
 				<Text />
-				<View
-					style={[
-						styles.row,
-						{
-							justifyContent: 'space-between',
-						},
-					]}>
+				<View style={[styles.row, { justifyContent: 'space-between' }]}>
 					<Text color='blue' style={[styles.label, { textTransform: 'none' }]}>
 						Attractions
 					</Text>
@@ -205,13 +200,7 @@ export default TravelDetails = ({ navigation, route }) => {
 					attractions.map((item, index) => renderItem('attractions', item, index))
 				)}
 				<Text />
-				<View
-					style={[
-						styles.row,
-						{
-							justifyContent: 'space-between',
-						},
-					]}>
+				<View style={[styles.row, { justifyContent: 'space-between' }]}>
 					<Text color='yellow' style={[styles.label, { textTransform: 'none' }]}>
 						Things to do
 					</Text>
