@@ -4,16 +4,10 @@ import Constants from 'expo-constants';
 import { MaterialIcons } from '@expo/vector-icons';
 import { UserContext } from '../contexts';
 import { Button, Card, Text, Touchable } from '../components';
-import { colors, db, styles } from '../constants';
+import { colors, db, images, styles } from '../constants';
 import { colorize, renderStars, singularize } from '../utils';
 
 export default TravelDetails = ({ navigation, route }) => {
-	const cityImages = {
-		// By Benh LIEU SONG (Flickr) - Sydney&#039;s Landmarks 2, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=82284289
-		sydney: require('../assets/sydney.jpg'),
-		// By Montage by HappyWaldo - Own work by uploader created from licence-free images from Commons., CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=78098825
-		melbourne: require('../assets/melbourne.jpg'),
-	};
 	const { name } = route.params;
 	const { travels, setTravels } = useContext(UserContext);
 	const travel = travels.find(travel => travel.name === name);
@@ -155,7 +149,7 @@ export default TravelDetails = ({ navigation, route }) => {
 				</Text>
 				<Text />
 				<View style={styles.center}>
-					<Image source={cityImages[city]} style={{ width: 300, height: 300 }} />
+					<Image source={images[city]} style={{ width: 300, height: 300 }} />
 				</View>
 				<Text />
 				<View style={[styles.row, { justifyContent: 'space-between' }]}>

@@ -11,19 +11,13 @@ import {
 	Text,
 	Touchable,
 } from '../components';
-import { colors, styles } from '../constants';
+import { colors, images, styles } from '../constants';
 
 export default Home = ({ navigation }) => {
 	const cities = [
 		{ label: 'Sydney', value: 'sydney' },
 		{ label: 'Melbourne', value: 'melbourne' },
 	];
-	const cityImages = {
-		// By Benh LIEU SONG (Flickr) - Sydney&#039;s Landmarks 2, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=82284289
-		sydney: require('../assets/sydney.jpg'),
-		// By Montage by HappyWaldo - Own work by uploader created from licence-free images from Commons., CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=78098825
-		melbourne: require('../assets/melbourne.jpg'),
-	};
 	const { showActionSheetWithOptions } = useActionSheet();
 	const { setHomeModalVisible } = useContext(ModalContext);
 	const [city, setCity] = useState('');
@@ -36,7 +30,7 @@ export default Home = ({ navigation }) => {
 			<View style={{ flex: 1 }}>
 				<ImageBackground
 					source={
-						city ? cityImages[city] : require('../assets/home.png')
+						city ? images[city] : images.home
 					}
 					resizeMode='cover'
 					style={[styles.center, { flex: 1 }]}>

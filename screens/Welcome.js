@@ -1,10 +1,11 @@
 import React from 'react';
 import { StyleSheet, View, ImageBackground } from 'react-native';
 import { Button, Text } from '../components';
+import { images } from '../constants';
 
 export default Welcome = ({ navigation }) => (
 	<ImageBackground
-		source={require('../assets/welcome.png')}
+		source={images.welcome}
 		resizeMode='contain'
 		style={styles.bg}>
 		<View style={styles.btnContainer}>
