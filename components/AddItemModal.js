@@ -43,12 +43,12 @@ export default AddItemModal = ({ travel, category }) => {
 												  }
 										}
 									/>
-									<Text color='white' style={styles.modalHeaderText}>
+									<Text color='white' style={[styles.textCenter, styles.modalHeaderText]}>
 										Choose which {category === 'activities' ? 'thing' : singularize(category)}(s){category === 'activities' && ' to do'} you want to add to this travel or press the close button to cancel
 									</Text>
 								</View>
 								<View style={styles.modalBody}>
-									<Text color='blue' style={styles.modalHeaderText}>
+									<Text color='blue' style={[styles.textCenter, styles.modalHeaderText]}>
 										{category === 'activities' ? 'Things to do' : capitalize(category)} in {capitalize(travel.city)}
 									</Text>
 									<FlatList
@@ -68,6 +68,11 @@ export default AddItemModal = ({ travel, category }) => {
 																{item.summary}
 															</Text>
 														</View>
+														{travel[category].includes(item.name) && (
+															<Text color='red' style={styles.modalBodyText}>
+																{travel.name} already has the {singularize(category)}.
+															</Text>
+														)}
 													</View>
 													<CheckBox
 														checked={chosen.includes(item.name)}

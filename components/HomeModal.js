@@ -9,7 +9,7 @@ import Text from './Text';
 import { colors, db, styles } from '../constants';
 import { capitalize, colorize, renderStars, singularize } from '../utils';
 
-export default HomeModal = ({ city, category }) => {
+export default HomeModal = ({ navigation, city, category }) => {
 	const { homeModalVisible, setHomeModalVisible } = useContext(ModalContext);
 	const { travels, setTravels } = useContext(UserContext);
 	const [name, setName] = useState('');
@@ -49,12 +49,12 @@ export default HomeModal = ({ city, category }) => {
 													  }
 											}
 										/>
-										<Text color='white' style={styles.modalHeaderText}>
+										<Text color='white' style={[styles.textCenter, styles.modalHeaderText]}>
 											Choose which travel(s) you want to add the {singularize(category)} to or press the back button to go back
 										</Text>
 									</View>
 									<View style={styles.modalBody}>
-										<Text color='blue' style={styles.modalHeaderText}>
+										<Text color='blue' style={[styles.textCenter, styles.modalHeaderText]}>
 											Your existing travels to {capitalize(city)}
 										</Text>
 										<FlatList
@@ -116,12 +116,12 @@ export default HomeModal = ({ city, category }) => {
 								<>
 									<View style={styles.modalHeader}>
 										<MaterialIcons style={styles.modalClose} name='cancel' size={24} color={colors.white} onPress={() => setHomeModalVisible(false)} />
-										<Text color='white' style={styles.modalHeaderText}>
+										<Text color='white' style={[styles.textCenter, styles.modalHeaderText]}>
 											Press + at the end of each {singularize(category)} to add it to your travel(s) or press the close button to cancel
 										</Text>
 									</View>
 									<View style={styles.modalBody}>
-										<Text color='blue' style={styles.modalHeaderText}>
+										<Text color='blue' style={[styles.textCenter, styles.modalHeaderText]}>
 											{category === 'activities' ? 'Things to do' : capitalize(category)} in {capitalize(city)}
 										</Text>
 										<FlatList
@@ -146,10 +146,25 @@ export default HomeModal = ({ city, category }) => {
 															name='add'
 															size={24}
 															color={index % 2 === 0 ? colors.white : colors.black}
-															onPress={() => {
-																setName(item.name);
-																setAdd(true);
-															}}
+															onPress={
+																travels.filter(item => item.city === city).length === 0
+																	? () =>
+																			Alert.alert('Oops!', `You don't have any existing travels to ${capitalize(city)}. Press OK to access your travels and create one.`, [
+																				{ text: 'Cancel', style: 'cancel' },
+																				{
+																					text: 'OK',
+																					style: 'default',
+																					onPress: () => {
+																						setHomeModalVisible(false);
+																						navigation.navigate('Travels');
+																					},
+																				},
+																			])
+																	: () => {
+																			setName(item.name);
+																			setAdd(true);
+																	  }
+															}
 														/>
 													</View>
 												</Card>

@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { View, ImageBackground, Alert } from 'react-native';
+import { StyleSheet, View, ImageBackground, Alert } from 'react-native';
 import { useActionSheet } from '@expo/react-native-action-sheet';
 import { MaterialIcons } from '@expo/vector-icons';
 import { ModalContext } from '../contexts';
@@ -26,14 +26,14 @@ export default Home = ({ navigation }) => {
 
 	return (
 		<Screen>
-			<HomeModal city={city} category={category} />
-			<View style={{ flex: 1 }}>
+			<HomeModal navigation={navigation} city={city} category={category} />
+			<View style={styles.flex}>
 				<ImageBackground
 					source={
 						city ? images[city] : images.home
 					}
 					resizeMode='cover'
-					style={[styles.center, { flex: 1 }]}>
+					style={[ styles.flex, styles.center]}>
 					<Touchable
 						btn
 						onPress={() =>
@@ -77,8 +77,8 @@ export default Home = ({ navigation }) => {
 					</Touchable>
 				</ImageBackground>
 			</View>
-			<View style={{ flex: 1, justifyContent: 'space-around' }}>
-				<View style={[styles.row, { justifyContent: 'space-around' }]}>
+			<View style={[styles.flex, extraStyles.container]}>
+				<View style={[styles.row, extraStyles.container]}>
 					<Category
 						color='red'
 						icon='restaurant'
@@ -102,7 +102,7 @@ export default Home = ({ navigation }) => {
 						}}
 					/>
 				</View>
-				<View style={[styles.row, { justifyContent: 'space-around' }]}>
+				<View style={[styles.row, extraStyles.container]}>
 					<Category
 						color='blue'
 						icon='attractions'
@@ -136,3 +136,9 @@ export default Home = ({ navigation }) => {
 		</Screen>
 	);
 };
+
+const extraStyles = StyleSheet.create({
+	container: {
+		justifyContent: 'space-around',
+	}
+})

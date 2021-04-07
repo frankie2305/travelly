@@ -12,7 +12,7 @@ import Touchable from './Touchable';
 import { colors, styles } from '../constants';
 
 const validationSchema = yup.object({
-	name: yup.string().required().min(8).max(20).label('Travel name'),
+	name: yup.string().trim().required().min(8).max(20).label('Travel name'),
 });
 
 export default AddTravelModal = () => {
@@ -29,7 +29,7 @@ export default AddTravelModal = () => {
 		<Modal animationType='fade' hardwareAccelerated onRequestClose={() => setAddTravelModalVisible(false)} transparent visible={addTravelModalVisible}>
 			<View style={styles.modal}>
 				<View style={styles.modalDialog}>
-					<View style={[styles.shadow, styles.modalContent, { flex: 0 }]}>
+					<View style={[styles.shadow, styles.modalContent, styles.disableFlex]}>
 						<View style={styles.modalHeader}>
 							<MaterialIcons
 								style={styles.modalClose}
@@ -41,17 +41,19 @@ export default AddTravelModal = () => {
 									setAddTravelModalVisible(false);
 								}}
 							/>
-							<Text color='white' style={styles.modalHeaderText}>
+							<Text color='white' style={[styles.textCenter, styles.modalHeaderText]}>
 								New Travel Form
 							</Text>
 						</View>
 						<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-							<View style={[styles.modalBody, { flex: 0 }]}>
+							<View style={[styles.modalBody, styles.disableFlex]}>
+								<Text />
 								<View style={styles.center}>
 									<Form
 										initialValues={{ name: '' }}
 										validationSchema={validationSchema}
 										onSubmit={({ name }) => {
+											name = name.trim();
 											if (travels.find(item => item.name === name)) {
 												Alert.alert('Oops!', 'A travel with that name already exists. Please choose a different name');
 											} else {
@@ -86,20 +88,10 @@ export default AddTravelModal = () => {
 															buttonIndex => buttonIndex < cities.length && setCity(cities[buttonIndex].value)
 														)
 													}>
-													<Text
-														style={{
-															borderColor: 'gainsboro',
-															borderRadius: 10,
-															borderWidth: 1,
-															fontFamily: 'roboto-regular',
-															fontSize: 20,
-															padding: 10,
-															textAlign: 'center',
-														}}>
-														{city ? cities.find(c => c.value === city).label : 'Choose a city'}
-													</Text>
+													<Text style={styles.textInput}>{city ? cities.find(c => c.value === city).label : 'Choose a city'}</Text>
+													<Text style={styles.textError} />
 												</Touchable>
-												<View style={{ marginTop: 50 }}>
+												<View style={styles.center}>
 													<Button color='green' icon='add' title='Add' onPress={city ? handleSubmit : () => Alert.alert('Oops!', 'Please choose a city first.')} />
 												</View>
 											</>

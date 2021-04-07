@@ -5,28 +5,15 @@ export const ModalContext = createContext();
 export const ModalContextProvider = ({ children }) => {
 	const [homeModalVisible, setHomeModalVisibleState] = useState(false);
 
-	const setHomeModalVisible = useCallback(
-		visible => setHomeModalVisibleState(visible),
-		[homeModalVisible]
-	);
+	const setHomeModalVisible = useCallback(visible => setHomeModalVisibleState(visible), [homeModalVisible]);
 
-	const [addTravelModalVisible, setAddTravelModalVisibleState] = useState(
-		false
-	);
+	const [addTravelModalVisible, setAddTravelModalVisibleState] = useState(false);
 
-	const setAddTravelModalVisible = useCallback(
-		visible => setAddTravelModalVisibleState(visible),
-		[addTravelModalVisible]
-	);
+	const setAddTravelModalVisible = useCallback(visible => setAddTravelModalVisibleState(visible), [addTravelModalVisible]);
 
-	const [addItemModalVisible, setAddItemModalVisibleState] = useState(
-		false
-	);
+	const [addItemModalVisible, setAddItemModalVisibleState] = useState(false);
 
-	const setAddItemModalVisible = useCallback(
-		visible => setAddItemModalVisibleState(visible),
-		[addItemModalVisible]
-	);
+	const setAddItemModalVisible = useCallback(visible => setAddItemModalVisibleState(visible), [addItemModalVisible]);
 
 	return (
 		<ModalContext.Provider
@@ -36,7 +23,7 @@ export const ModalContextProvider = ({ children }) => {
 				addTravelModalVisible,
 				setAddTravelModalVisible,
 				addItemModalVisible,
-				setAddItemModalVisible
+				setAddItemModalVisible,
 			}}>
 			{children}
 		</ModalContext.Provider>

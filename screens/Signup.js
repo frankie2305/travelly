@@ -1,15 +1,17 @@
 import React from 'react';
-import { View, Alert, TouchableOpacity } from 'react-native';
-import * as yup from 'yup';
+import { StyleSheet, View, Alert, TouchableOpacity } from 'react-native';
+import Constants from 'expo-constants';
 import * as SecureStore from 'expo-secure-store';
+import * as yup from 'yup';
 import { Button, Form, Screen, Text, TextInput } from '../components';
 import { styles } from '../constants';
 
 const validationSchema = yup.object({
-	username: yup.string().required().min(8).max(20).label('Username'),
-	password: yup.string().required().min(8).max(20).label('Password'),
+	username: yup.string().trim().required().min(8).max(20).label('Username'),
+	password: yup.string().trim().required().min(8).max(20).label('Password'),
 	confirmPassword: yup
 		.string()
+		.trim()
 		.required()
 		.oneOf([null, yup.ref('password')], 'Passwords must match')
 		.label('Password confirmation'),
@@ -17,7 +19,7 @@ const validationSchema = yup.object({
 
 export default Signup = ({ navigation }) => (
 	<Screen style={styles.center}>
-		<Text color='blue' style={[styles.title, { marginBottom: 30 }]}>
+		<Text color='blue' style={[styles.title, extraStyles.title]}>
 			Signup Form
 		</Text>
 		<Form
@@ -25,6 +27,8 @@ export default Signup = ({ navigation }) => (
 			validationSchema={validationSchema}
 			onSubmit={({ username, password }, { resetForm }) => {
 				resetForm();
+				username = username.trim();
+				password = password.trim();
 				SecureStore.getItemAsync('users').then(value => {
 					let users;
 					if (value) {
@@ -44,16 +48,10 @@ export default Signup = ({ navigation }) => (
 						'users',
 						JSON.stringify(users)
 					).then(() => {
+						navigation.navigate('Login');
 						Alert.alert(
 							'Ta-da!',
-							'Your account has been successfully created. You will now proceed to the login screen.',
-							[
-								{
-									text: 'OK',
-									onPress: () => navigation.navigate('Login'),
-									style: 'cancel',
-								},
-							]
+							'Your account has been successfully created. You can now log in.'
 						);
 					});
 				});
@@ -97,12 +95,12 @@ export default Signup = ({ navigation }) => (
 						errors={errors.confirmPassword}
 					/>
 					<Button
-						onPress={handleSubmit}
 						icon='person-add'
 						title='Sign up'
+						onPress={handleSubmit}
 					/>
 					<View style={[styles.row, styles.center]}>
-						<Text color='gray' style={{ marginTop: 10 }}>
+						<Text color='gray' style={extraStyles.text}>
 							Already have an account?{' '}
 						</Text>
 						<TouchableOpacity
@@ -110,7 +108,7 @@ export default Signup = ({ navigation }) => (
 								resetForm();
 								navigation.navigate('Login');
 							}}>
-							<Text color='cyan' style={{ marginTop: 10 }}>
+							<Text color='cyan' style={extraStyles.text}>
 								Log in
 							</Text>
 						</TouchableOpacity>
@@ -120,3 +118,12 @@ export default Signup = ({ navigation }) => (
 		</Form>
 	</Screen>
 );
+
+const extraStyles = StyleSheet.create({
+	title: {
+		marginBottom: Constants.statusBarHeight,
+	},
+	text: {
+		marginTop: 10,
+	},
+});

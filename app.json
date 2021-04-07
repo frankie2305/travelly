@@ -1,7 +1,7 @@
 {
 	"expo": {
 		"name": "Travelly",
-		"description": "Having trouble deciding where to go for your next trip? Look no further. Travelly, the missing travel companion, has got you covered.",
+		"description": "Having a hard time deciding where to go and what to do for your next trip? Look no further. Travelly, the missing travel companion, has got you covered.",
 		"slug": "travelly",
 		"version": "1.0.0",
 		"orientation": "portrait",

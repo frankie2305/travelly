@@ -1,14 +1,15 @@
 import React, { useContext } from 'react';
-import { View, Alert, TouchableOpacity } from 'react-native';
-import * as yup from 'yup';
+import { StyleSheet, View, Alert, TouchableOpacity } from 'react-native';
+import Constants from 'expo-constants';
 import * as SecureStore from 'expo-secure-store';
+import * as yup from 'yup';
 import { AuthContext, UserContext } from '../contexts';
 import { Button, Form, Screen, Text, TextInput } from '../components';
 import { styles } from '../constants';
 
 const validationSchema = yup.object({
-	username: yup.string().required().min(8).max(20).label('Username'),
-	password: yup.string().required().min(8).max(20).label('Password'),
+	username: yup.string().trim().required().min(8).max(20).label('Username'),
+	password: yup.string().trim().required().min(8).max(20).label('Password'),
 });
 
 export default Login = ({ navigation }) => {
@@ -17,7 +18,7 @@ export default Login = ({ navigation }) => {
 
 	return (
 		<Screen style={styles.center}>
-			<Text color='blue' style={[styles.title, { marginBottom: 30 }]}>
+			<Text color='blue' style={[styles.title, extraStyles.title]}>
 				Login Form
 			</Text>
 			<Form
@@ -25,9 +26,12 @@ export default Login = ({ navigation }) => {
 				validationSchema={validationSchema}
 				onSubmit={({ username, password }, { resetForm }) => {
 					resetForm();
+					username = username.trim();
+					password = password.trim();
 					SecureStore.getItemAsync('users').then(value => {
 						let users = JSON.parse(value);
 						if (
+							users &&
 							users.find(
 								user =>
 									user.username === username &&
@@ -74,12 +78,12 @@ export default Login = ({ navigation }) => {
 							errors={errors.password}
 						/>
 						<Button
-							onPress={handleSubmit}
 							icon='login'
 							title='Log in'
+							onPress={handleSubmit}
 						/>
 						<View style={[styles.row, styles.center]}>
-							<Text color='gray' style={{ marginTop: 10 }}>
+							<Text color='gray' style={extraStyles.text}>
 								Don't have an account?{' '}
 							</Text>
 							<TouchableOpacity
@@ -87,7 +91,7 @@ export default Login = ({ navigation }) => {
 									resetForm();
 									navigation.navigate('Signup');
 								}}>
-								<Text color='cyan' style={{ marginTop: 10 }}>
+								<Text color='cyan' style={extraStyles.text}>
 									Sign up
 								</Text>
 							</TouchableOpacity>
@@ -98,3 +102,12 @@ export default Login = ({ navigation }) => {
 		</Screen>
 	);
 };
+
+const extraStyles = StyleSheet.create({
+	title: {
+		marginBottom: Constants.statusBarHeight,
+	},
+	text: {
+		marginTop: 10,
+	},
+});

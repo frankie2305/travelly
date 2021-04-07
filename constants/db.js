@@ -4,17 +4,14 @@ export default db = {
 			{
 				name: 'Cucina Porto',
 				summary: '$$ - $$$, Italian, Pizza, Neapolitan',
-				location:
-					'92 Hay Street, Sydney, New South Wales 2000 Australia',
+				location: '92 Hay Street, Sydney, New South Wales 2000 Australia',
 				website: 'https://www.star.com.au/sydney/cucina-porto',
 				phone: '+61 1800 700 700',
 			},
 			{
 				name: 'Farmhouse Kings Cross',
-				summary:
-					'$$ - $$$, Australian, Vegetarian, Friendly, Vegan Options',
-				location:
-					'Shop 4 40 Bayswater Rd, Sydney, New South Wales 2011 Australia',
+				summary: '$$ - $$$, Australian, Vegetarian, Friendly, Vegan Options',
+				location: 'Shop 4 40 Bayswater Rd, Sydney, New South Wales 2011 Australia',
 				website: 'https://farmhousekingscross.com.au/',
 				email: 'eat@farmhousekingcross.com.au',
 				phone: '+61 448 413 791',
@@ -22,11 +19,26 @@ export default db = {
 			{
 				name: 'Thai Pothong',
 				summary: '$$ - $$$, Asian, Thai, Healthy',
-				location:
-					'U 4 294 King St, Newtown, Sydney, New South Wales 2042 Australia',
+				location: 'U 4 294 King St, Newtown, Sydney, New South Wales 2042 Australia',
 				website: 'https://www.thaipothong.com.au/',
 				email: 'thaipothong@bigpond.com.au',
 				phone: '+61 2 9550 6277',
+			},
+			{
+				name: 'Flavour of India',
+				summary: '$$ - $$$, Indian, Vegetarian, Friendly, Vegan Options',
+				location: '128 New South Head Rd, Edgecliff, Sydney, New South Wales 2027 Australia',
+				website: 'http://www.flavourofindia.co/',
+				email: 'dine@flavourofindia.co',
+				phone: '+61 2 9326 2659',
+			},
+			{
+				name: 'Nour Sydney',
+				summary: '$$ - $$$, Lebanese, Middle Eastern, Israeli',
+				location: 'SE 3 490 Crown St Surry Hills, Sydney, New South Wales 2010 Australia',
+				website: 'https://noursydney.com/',
+				email: 'info@noursydney.com',
+				phone: '+61 2 9331 3413',
 			},
 		],
 		hotels: [
@@ -34,8 +46,7 @@ export default db = {
 				name: 'The Fullerton Hotel Sydney',
 				stars: 5,
 				summary: 'Classic, City View',
-				location:
-					'1 Martin Place, Sydney, New South Wales 2000 Australia',
+				location: '1 Martin Place, Sydney, New South Wales 2000 Australia',
 				email: 'fsy.enquiries@fullertonhotels.com',
 				phone: '+61 2 8223 1111',
 			},
@@ -43,8 +54,7 @@ export default db = {
 				name: 'QT Sydney',
 				stars: 5,
 				summary: 'Quirky Hotels, Art Deco Style',
-				location:
-					'49 Market Street Corner of Market and George Streets, Sydney, New South Wales 2000 Australia',
+				location: '49 Market Street Corner of Market and George Streets, Sydney, New South Wales 2000 Australia',
 				website: 'https://www.qthotels.com/rates/#/sydney-cbd',
 				email: 'reservations_qtsydney@evt.com',
 				phone: '+61 2 8262 0000',
@@ -53,19 +63,33 @@ export default db = {
 				name: 'Sir Stamford at Circular Quay Hotel Sydney',
 				stars: 5,
 				summary: 'Classic, Quiet',
-				location:
-					'93 Macquarie Street, Sydney, New South Wales 2000 Australia',
+				location: '93 Macquarie Street, Sydney, New South Wales 2000 Australia',
 				email: 'reservations@sscq.stamford.com.au',
 				phone: '+61 2 9252 4600',
+			},
+			{
+				name: 'Little National Hotel Sydney',
+				stars: 5,
+				summary: 'Classic, Quiet',
+				location: '26 Clarence St, Sydney, New South Wales 2000 Australia',
+				website: 'https://littlenationalhotel.com.au/sydney/',
+				email: 'LNreception@domahotels.com.au',
+				phone: '+61 2 6185 1988',
+			},
+			{
+				name: 'Four Seasons Hotel Sydney',
+				stars: 5,
+				summary: 'Bay View, Luxury',
+				location: '199 George Street, Sydney, New South Wales 2000 Australia',
+				website: 'https://www.fourseasons.com/sydney/accommodations/?source=dis_syd_tripadvisor_acr_tabl-package',
+				phone: '+61 2 9250 3100',
 			},
 		],
 		attractions: [
 			{
 				name: 'Sydney Opera House',
-				summary:
-					'Points of Interest & Landmarks, Architectural Buildings, Theaters, Central Business District',
-				location:
-					'Bennelong Point Easy walk from Circular Quay Train Station, Sydney, New South Wales 2000 Australia',
+				summary: 'Points of Interest & Landmarks, Architectural Buildings, Theaters, Central Business District',
+				location: 'Bennelong Point Easy walk from Circular Quay Train Station, Sydney, New South Wales 2000 Australia',
 				website: 'https://www.sydneyoperahouse.com/',
 				phone: '+61 2 9250 7111',
 			},
@@ -73,17 +97,27 @@ export default db = {
 				name: 'Sydney Harbour Bridge',
 				summary: 'Bridges',
 				location: 'Sydney, New South Wales 2060 Australia',
-				website:
-					'https://www.sydney.com/destinations/sydney/sydney-city/sydney-harbour/sydney-harbour-bridge',
+				website: 'https://www.sydney.com/destinations/sydney/sydney-city/sydney-harbour/sydney-harbour-bridge',
 				phone: '1800 067 676',
 			},
 			{
 				name: 'Royal Botanic Garden Sydney',
 				summary: 'Gardens, Central Business District',
-				location:
-					'Mrs Macquaries Rd, Sydney, New South Wales 2000 Australia',
+				location: 'Mrs Macquaries Rd, Sydney, New South Wales 2000 Australia',
 				website: 'https://www.rbgsyd.nsw.gov.au/',
 				phone: '+61 2 9231 8111',
+			},
+			{
+				name: 'Marrickville Organic Food and Farmers Markets',
+				summary: 'Flea & Street Markets',
+				location: '142 Addison Rd The Addison Road Centre, Marrickville, Sydney, New South Wales 2204 Australia',
+				website: 'https://www.organicfoodmarkets.com.au/markets_solo.php?market=MARRICKVILLE&id=15',
+			},
+			{
+				name: 'Sydney Harbour',
+				summary: 'Bodies of Water',
+				location: 'Sydney, New South Wales Australia',
+				website: 'https://www.dpie.nsw.gov.au/housing-and-property',
 			},
 		],
 		activities: [
@@ -91,7 +125,7 @@ export default db = {
 				name: 'Chinese Garden General Admission Ticket',
 				summary: 'Parks',
 				operatedBy: 'Chinese Garden of Friendship',
-				duration: '45-60 minutes',
+				duration: '45-60m',
 				price: 'A$8.00',
 			},
 			{
@@ -102,12 +136,25 @@ export default db = {
 				price: 'A$32.00',
 			},
 			{
-				name:
-					'All Inclusive Blue Mountains Small-Group Day Trip from Sydney',
+				name: 'All Inclusive Blue Mountains Small-Group Day Trip from Sydney',
 				summary: 'Bus Tours',
 				operatedBy: "Anderson's Tours",
 				duration: '11h',
 				price: 'A$235.00',
+			},
+			{
+				name: 'Journey Beyond Cruise Sydney Harbour - All inclusive Lunch Cruise',
+				summary: 'Full-day Tours',
+				operatedBy: 'Journey Beyond Cruise Sydney',
+				duration: '2h 30m',
+				price: 'A$120.45',
+			},
+			{
+				name: '30-Minute Sydney Harbour Jet Boat Ride: Thunder Twist',
+				summary: 'Jet Boat Rides',
+				operatedBy: 'Thunder Jet Boat Sydney',
+				duration: '30m',
+				price: 'A$85.00',
 			},
 		],
 	},
@@ -116,18 +163,15 @@ export default db = {
 			{
 				name: 'Foglia di Fico',
 				summary: '$$ - $$$, Italian, European, Vegetarian, Friendly',
-				location:
-					'585 La Trobe St (Spencer St entrance), Melbourne, Victoria 3000 Australia',
+				location: '585 La Trobe St (Spencer St entrance), Melbourne, Victoria 3000 Australia',
 				website: 'http://www.fogliadifico.com.au/',
 				email: 'info@fogliadifico.com',
 				phone: '+61 3 9642 4394',
 			},
 			{
 				name: 'Scopri',
-				summary:
-					'$$ - $$$, Italian, Vegetarian, Friendly, Vegan Options',
-				location:
-					'191 Nicholson St Carlton, Melbourne, Victoria 3053 Australia',
+				summary: '$$ - $$$, Italian, Vegetarian, Friendly, Vegan Options',
+				location: '191 Nicholson St Carlton, Melbourne, Victoria 3053 Australia',
 				website: 'https://www.scopri.com.au/',
 				email: 'info@scopri.com.au',
 				phone: '+61 3 9347 8252',
@@ -135,11 +179,26 @@ export default db = {
 			{
 				name: 'Da Guido La Pasta',
 				summary: '$$ - $$$, Italian, Mediterranean, European',
-				location:
-					'130 Lygon St Carlton, Melbourne, Victoria 3053 Australia',
+				location: '130 Lygon St Carlton, Melbourne, Victoria 3053 Australia',
 				website: 'https://www.daguidomelbourne.com/',
 				email: 'daguidomelbourne@gmail.com',
 				phone: '+61 3 8528 4547',
+			},
+			{
+				name: '11 Inch Pizza',
+				summary: '$, Italian, Pizza, Vegetarian Friendly',
+				location: 'Equitable Place 353-359 Little Collins Street, Melbourne, Victoria 3000 Australia',
+				website: 'https://www.11inchpizza.com.au/',
+				email: 'orders@11inchpizza.com.au',
+				phone: '+61 3 9602 5333',
+			},
+			{
+				name: 'Hochi Mama',
+				summary: '$$ - $$$, Asian, Thai, Fusion',
+				location: '35 Little Bourke St, Melbourne, Victoria 3000 Australia',
+				website: 'https://hochimama.melbourne/',
+				email: 'info@hcmkitchen.com.au',
+				phone: '+61 3 9078 2285',
 			},
 		],
 		hotels: [
@@ -147,8 +206,7 @@ export default db = {
 				name: 'Park Hyatt Melbourne',
 				stars: 5,
 				summary: 'Luxury, Classic',
-				location:
-					'1 Parliament Square off Parliament Place, Melbourne, Victoria 3002 Australia',
+				location: '1 Parliament Square off Parliament Place, Melbourne, Victoria 3002 Australia',
 			},
 			{
 				name: 'QT Melbourne',
@@ -168,6 +226,21 @@ export default db = {
 				email: 'reservations.mct@crownhotels.com.au',
 				phone: '+61 3 9292 6868',
 			},
+			{
+				name: 'The Langham, Melbourne',
+				stars: 4,
+				summary: 'River View, Great View',
+				location: '1 Southgate Ave, Melbourne, Victoria 3006 Australia',
+			},
+			{
+				name: 'Sofitel Melbourne on Collins',
+				stars: 5,
+				summary: 'Great View, Luxury',
+				location: '25 Collins Street, Melbourne, Victoria 3000 Australia',
+				website: 'https://all.accor.com/hotel/1902/index.en.shtml',
+				email: 'H1902@sofitel.com',
+				phone: '+61 3 9653 0000',
+			},
 		],
 		attractions: [
 			{
@@ -180,8 +253,7 @@ export default db = {
 			{
 				name: 'Melbourne Cricket Ground (MCG)',
 				summary: 'Specialty Museums, Arenas & Stadiums',
-				location:
-					'Brunton Ave Yarra Park, Jolimont, Melbourne, Victoria 8002 Australia',
+				location: 'Brunton Ave Yarra Park, Jolimont, Melbourne, Victoria 8002 Australia',
 				website: 'https://www.mcg.org.au/',
 				phone: '+61 3 9657 8888',
 			},
@@ -191,6 +263,20 @@ export default db = {
 				location: '180 St Kilda Rd, Melbourne, Victoria 8006 Australia',
 				website: 'https://www.ngv.vic.gov.au/',
 				phone: '+61 3 8620 2222',
+			},
+			{
+				name: 'ArtVo',
+				summary: 'Art Museums, Docklands',
+				location: '26 Star Cres Level 1, The District, Melbourne, Victoria 3008 Australia',
+				website: 'https://www.artvo.com.au/',
+				phone: '+61 3 9600 1118',
+			},
+			{
+				name: 'Eureka Skydeck',
+				summary: 'Observation Decks & Towers, Southbank',
+				location: '7 Riverside Qy Southbank, Melbourne, Victoria 3006 Australia',
+				website: 'https://www.eurekaskydeck.com.au/',
+				phone: '+61 3 9693 8888',
 			},
 		],
 		activities: [
@@ -214,6 +300,20 @@ export default db = {
 				operatedBy: 'Melbourne River Cruises',
 				duration: '3h',
 				price: 'A$145.00',
+			},
+			{
+				name: 'ArtVo Immersive Gallery Experience',
+				summary: 'Attractions & Museums',
+				operatedBy: 'ArtVo',
+				duration: '1–2h',
+				price: 'A$28.00',
+			},
+			{
+				name: 'Yarra Valley Winery Tour from Melbourne with Gourmet Vineyard Lunch',
+				summary: 'Full-day tours',
+				operatedBy: 'Chillout Travel Winery Tours',
+				duration: '8h',
+				price: 'A$134.00',
 			},
 		],
 	},

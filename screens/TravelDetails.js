@@ -1,11 +1,11 @@
 import React, { useContext, useState } from 'react';
-import { View, ScrollView, Image, Linking, Alert } from 'react-native';
+import { StyleSheet, View, ScrollView, Image, Linking, Alert } from 'react-native';
 import Constants from 'expo-constants';
 import { MaterialIcons } from '@expo/vector-icons';
 import { ModalContext, UserContext } from '../contexts';
 import { AddItemModal, Button, Card, Text, Touchable } from '../components';
 import { colors, db, images, styles } from '../constants';
-import { colorize, renderStars, singularize } from '../utils';
+import { capitalize, colorize, renderStars, singularize } from '../utils';
 
 export default TravelDetails = ({ navigation, route }) => {
 	const { name } = route.params;
@@ -21,8 +21,8 @@ export default TravelDetails = ({ navigation, route }) => {
 		const activities = db[city].activities.filter(item => travel.activities.includes(item.name));
 		const renderItem = (category, item, index) => (
 			<Card key={item.name} color={colorize(index + 1)}>
-				<View style={[styles.row, { alignItems: 'center', justifyContent: 'space-between' }]}>
-					<View style={{ flex: 1 }}>
+				<View style={[styles.row, styles.modalCardContainer]}>
+					<View style={styles.flex}>
 						<Text color={colorize(index)} style={{ fontFamily: 'roboto-bold' }}>
 							{item.name}
 						</Text>
@@ -108,6 +108,7 @@ export default TravelDetails = ({ navigation, route }) => {
 						)}
 					</View>
 					<MaterialIcons
+						style={extraStyles.delete}
 						name='delete'
 						size={24}
 						color={colors.red}
@@ -139,25 +140,20 @@ export default TravelDetails = ({ navigation, route }) => {
 		return (
 			<>
 				<AddItemModal travel={travel} category={category} />
-				<ScrollView
-					style={{
-						flex: 1,
-						marginVertical: Constants.statusBarHeight,
-						marginHorizontal: 10,
-					}}>
-					<Text color='blue' style={[styles.title, { textAlign: 'center' }]}>
+				<ScrollView style={extraStyles.container}>
+					<Text color='blue' style={[styles.title, styles.textCenter]}>
 						Travel details of {name}
 					</Text>
-					<Text color='blue' style={[styles.label, { textAlign: 'center' }]}>
-						Destination: {city}
+					<Text color='blue' style={[styles.label, styles.textCenter, styles.textOriginal]}>
+						Destination: {capitalize(city)}
 					</Text>
 					<Text />
 					<View style={styles.center}>
 						<Image source={images[city]} style={{ width: 300, height: 300 }} />
 					</View>
 					<Text />
-					<View style={[styles.row, { justifyContent: 'space-between' }]}>
-						<Text color='red' style={[styles.label, { textTransform: 'none' }]}>
+					<View style={[styles.row, styles.modalCardContainer]}>
+						<Text color='red' style={[styles.label, styles.textOriginal]}>
 							Restaurants
 						</Text>
 						<MaterialIcons
@@ -171,15 +167,15 @@ export default TravelDetails = ({ navigation, route }) => {
 						/>
 					</View>
 					{restaurants.length === 0 ? (
-						<Text color='pink' style={{ textAlign: 'center' }}>
+						<Text color='pink' style={styles.textCenter}>
 							You don't have any restaurants for this travel yet.
 						</Text>
 					) : (
 						restaurants.map((item, index) => renderItem('restaurants', item, index))
 					)}
 					<Text />
-					<View style={[styles.row, { justifyContent: 'space-between' }]}>
-						<Text color='green' style={[styles.label, { textTransform: 'none' }]}>
+					<View style={[styles.row, styles.modalCardContainer]}>
+						<Text color='green' style={[styles.label, styles.textOriginal]}>
 							Hotels
 						</Text>
 						<MaterialIcons
@@ -193,15 +189,15 @@ export default TravelDetails = ({ navigation, route }) => {
 						/>
 					</View>
 					{hotels.length === 0 ? (
-						<Text color='teal' style={{ textAlign: 'center' }}>
+						<Text color='teal' style={styles.textCenter}>
 							You don't have any hotels for this travel yet.
 						</Text>
 					) : (
 						hotels.map((item, index) => renderItem('hotels', item, index))
 					)}
 					<Text />
-					<View style={[styles.row, { justifyContent: 'space-between' }]}>
-						<Text color='blue' style={[styles.label, { textTransform: 'none' }]}>
+					<View style={[styles.row, styles.modalCardContainer]}>
+						<Text color='blue' style={[styles.label, styles.textOriginal]}>
 							Attractions
 						</Text>
 						<MaterialIcons
@@ -215,15 +211,15 @@ export default TravelDetails = ({ navigation, route }) => {
 						/>
 					</View>
 					{attractions.length === 0 ? (
-						<Text color='cyan' style={{ textAlign: 'center' }}>
+						<Text color='cyan' style={styles.textCenter}>
 							You don't have any attractions for this travel yet.
 						</Text>
 					) : (
 						attractions.map((item, index) => renderItem('attractions', item, index))
 					)}
 					<Text />
-					<View style={[styles.row, { justifyContent: 'space-between' }]}>
-						<Text color='yellow' style={[styles.label, { textTransform: 'none' }]}>
+					<View style={[styles.row, styles.modalCardContainer]}>
+						<Text color='yellow' style={[styles.label, styles.textOriginal]}>
 							Things to do
 						</Text>
 						<MaterialIcons
@@ -237,7 +233,7 @@ export default TravelDetails = ({ navigation, route }) => {
 						/>
 					</View>
 					{activities.length === 0 ? (
-						<Text color='orange' style={{ textAlign: 'center' }}>
+						<Text color='orange' style={styles.textCenter}>
 							You don't have any things to do for this travel yet.
 						</Text>
 					) : (
@@ -271,3 +267,14 @@ export default TravelDetails = ({ navigation, route }) => {
 
 	return null;
 };
+
+const extraStyles = StyleSheet.create({
+	container: {
+		flex: 1,
+		marginVertical: Constants.statusBarHeight,
+		marginHorizontal: 10,
+	},
+	delete: {
+		marginLeft: 10,
+	},
+});

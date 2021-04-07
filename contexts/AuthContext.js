@@ -9,9 +9,5 @@ export const AuthContextProvider = ({ children }) => {
 
 	const logout = useCallback(() => setIsLoggedIn(false), [isLoggedIn]);
 
-	return (
-		<AuthContext.Provider value={{ isLoggedIn, login, logout }}>
-			{children}
-		</AuthContext.Provider>
-	);
+	return <AuthContext.Provider value={{ isLoggedIn, login, logout }}>{children}</AuthContext.Provider>;
 };

@@ -1,19 +1,9 @@
 import React from 'react';
-import {
-	TouchableWithoutFeedback,
-	Keyboard,
-	SafeAreaView,
-	StyleSheet,
-} from 'react-native';
+import { TouchableWithoutFeedback, Keyboard, SafeAreaView } from 'react-native';
+import { styles } from '../constants';
 
 export default Screen = ({ style, children }) => (
 	<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-		<SafeAreaView style={[styles.screen, style]}>{children}</SafeAreaView>
+		<SafeAreaView style={[styles.flex, style]}>{children}</SafeAreaView>
 	</TouchableWithoutFeedback>
 );
-
-const styles = StyleSheet.create({
-	screen: {
-		flex: 1,
-	},
-});

@@ -1,11 +1,11 @@
 import React from 'react';
-import { View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import Text from './Text';
 import { colors, styles } from '../constants';
 
 export default Header = ({ navigation, icon, title }) => (
-	<View style={[styles.row, styles.center, { width: '100%' }]}>
+	<View style={[styles.row, styles.center, extraStyles.container]}>
 		<MaterialIcons
 			style={{ position: 'absolute', left: 0 }}
 			name='menu'
@@ -22,3 +22,9 @@ export default Header = ({ navigation, icon, title }) => (
 		</View>
 	</View>
 );
+
+const extraStyles = StyleSheet.create({
+	container: {
+		width: '100%'
+	}
+})

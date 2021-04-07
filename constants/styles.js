@@ -20,6 +20,12 @@ export default styles = StyleSheet.create({
 		alignItems: 'center',
 		justifyContent: 'center',
 	},
+	disableFlex: {
+		flex: 0,
+	},
+	flex: {
+		flex: 1,
+	},
 	label: {
 		fontFamily: 'roboto-bold',
 		fontSize: 24,
@@ -69,7 +75,6 @@ export default styles = StyleSheet.create({
 	modalHeaderText: {
 		fontFamily: 'roboto-black',
 		fontSize: 20,
-		textAlign: 'center',
 	},
 	row: {
 		flexDirection: 'row',
@@ -83,6 +88,25 @@ export default styles = StyleSheet.create({
 		},
 		shadowOpacity: 0.5,
 		shadowRadius: 10,
+	},
+	textCenter: {
+		textAlign: 'center',
+	},
+	textError: {
+		marginTop: 10,
+		marginBottom: 20,
+	},
+	textInput: {
+		borderColor: colors.gray,
+		borderRadius: 10,
+		borderWidth: StyleSheet.hairlineWidth,
+		fontFamily: 'roboto-regular',
+		fontSize: 20,
+		padding: 10,
+		textAlign: 'center',
+	},
+	textOriginal: {
+		textTransform: 'none',
 	},
 	title: {
 		fontFamily: 'roboto-black',
