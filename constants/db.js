@@ -10,7 +10,7 @@ export default db = {
 			},
 			{
 				name: 'Farmhouse Kings Cross',
-				summary: '$$ - $$$, Australian, Vegetarian, Friendly, Vegan Options',
+				summary: '$$ - $$$, Australian, Vegetarian Friendly, Vegan Options',
 				location: 'Shop 4 40 Bayswater Rd, Sydney, New South Wales 2011 Australia',
 				website: 'https://farmhousekingscross.com.au/',
 				email: 'eat@farmhousekingcross.com.au',
@@ -26,7 +26,7 @@ export default db = {
 			},
 			{
 				name: 'Flavour of India',
-				summary: '$$ - $$$, Indian, Vegetarian, Friendly, Vegan Options',
+				summary: '$$ - $$$, Indian, Vegetarian Friendly, Vegan Options',
 				location: '128 New South Head Rd, Edgecliff, Sydney, New South Wales 2027 Australia',
 				website: 'http://www.flavourofindia.co/',
 				email: 'dine@flavourofindia.co',
@@ -162,7 +162,7 @@ export default db = {
 		restaurants: [
 			{
 				name: 'Foglia di Fico',
-				summary: '$$ - $$$, Italian, European, Vegetarian, Friendly',
+				summary: '$$ - $$$, Italian, European, Vegetarian Friendly',
 				location: '585 La Trobe St (Spencer St entrance), Melbourne, Victoria 3000 Australia',
 				website: 'http://www.fogliadifico.com.au/',
 				email: 'info@fogliadifico.com',
@@ -170,7 +170,7 @@ export default db = {
 			},
 			{
 				name: 'Scopri',
-				summary: '$$ - $$$, Italian, Vegetarian, Friendly, Vegan Options',
+				summary: '$$ - $$$, Italian, Vegetarian Friendly, Vegan Options',
 				location: '191 Nicholson St Carlton, Melbourne, Victoria 3053 Australia',
 				website: 'https://www.scopri.com.au/',
 				email: 'info@scopri.com.au',
